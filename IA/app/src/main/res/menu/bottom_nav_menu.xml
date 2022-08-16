@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/MainWork"
+        android:icon="@drawable/ic_baseline_home_work_24"
+        android:title="Main Work" />
+
+    <item
+        android:id="@+id/Personal"
+        android:icon="@drawable/ic_baseline_cake_24"
+        android:title="Personal" />
+
+    <item
+        android:id="@+id/Other"
+        android:icon="@drawable/ic_baseline_event_24"
+        android:title="Other" />
+</menu>

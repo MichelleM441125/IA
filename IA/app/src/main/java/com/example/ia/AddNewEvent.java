@@ -2,12 +2,17 @@ package com.example.ia;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-import java.util.Date;
+import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,6 +28,8 @@ public class AddNewEvent extends AppCompatActivity {
     private EditText newEventTitle;
     private EditText newEventDate;
     private EditText newEventQuote;
+    private String newDays;
+
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore firebase;
@@ -40,31 +47,52 @@ public class AddNewEvent extends AppCompatActivity {
         firebase = FirebaseFirestore.getInstance();
     }
 
-    public void addNewEvent(View x)
-    {
-        if(newEventTitle != null && newEventDate != null)
+    @Override
+    public void onBackPressed() {
+        // this method is used to finish the activity
+        // when user enters the correct password
+        this.finishAffinity();
+    }
+
+    public void addNewEvent(View x) throws ParseException {
+        if(newEventTitle == null || newEventDate == null || newEventQuote == null)
+        {
+            Toast.makeText(getApplicationContext(),"Please Enter all the info",
+                    Toast.LENGTH_SHORT).show();
+        }
+        else
         {
             String newTitle = newEventTitle.getText().toString();
-            Date newDate = (Date) newEventDate.getText();
+            String newDate = newEventDate.getText().toString();
             String newQuote = newEventQuote.getText().toString();
 
-            Events newEvent = new Events(newTitle, newDate, newQuote);
+            SimpleDateFormat dates = new SimpleDateFormat("yyyy-MM-dd");
+            Calendar c = Calendar.getInstance();
+            String date = dates.format(c.getTime());
+
+            Date date1 = dates.parse(newDate);
+            Date date2 = dates.parse(date);
+
+            long difference = Math.abs(date1.getTime() - date2.getTime());
+            long differenceDates = difference / (24 * 60 * 60 * 1000);
+
+            newDays = Long.toString(differenceDates);
+
+            Events newEvent = new Events(newTitle, newDate, newQuote, newDays);
 
             firebase.collection("Event").add(newEvent);
 
+            Intent goHome = new Intent(this, Home.class);
+            startActivity(goHome);
         }
-        else if(newEventTitle == null)
-        {
-            Toast.makeText(getApplicationContext(),"Please Enter the Title of the New Event",
-                    Toast.LENGTH_SHORT).show();
-        }
-        else if(newEventDate == null)
-        {
-            Toast.makeText(getApplicationContext(),"Please Enter the Due Date of the New Event",
-                    Toast.LENGTH_SHORT).show();
-        }
+
     }
 
+    public void goBackHome(View x)
+    {
+        Intent goHome = new Intent(this, Home.class);
+        startActivity(goHome);
 
+    }
 
 }

@@ -6,6 +6,10 @@ public class User {
     public String passcode;
     public boolean isLogIn;
 
+    public User()
+    {
+
+    }
 
     public User(String passcode, boolean isLogIn)
     {
@@ -20,5 +24,13 @@ public class User {
 
     public boolean getIsLogIn() {
         return isLogIn;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "passcode='" + passcode + '\'' +
+                ", isLogIn=" + isLogIn +
+                '}';
     }
 }

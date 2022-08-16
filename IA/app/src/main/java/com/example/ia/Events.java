@@ -6,16 +6,28 @@ import java.util.Date;
 public class Events {
 
     public String title;
-    public Date date;
+    public String date;
     public String quote;
+    public String days;
     public ArrayList<Subevent> subEvents;
     public ArrayList<Diary> diaries;
 
-    public Events(String title, Date date, String quote)
+    public Events()
+    {
+
+    }
+
+
+    public Events(String title, String date, String quote, String days)
     {
         this.title = title;
         this.date = date;
         this.quote = quote;
+        this.days = days;
+    }
+
+    public String getDays() {
+        return days;
     }
 
     public String getTitle() {
@@ -26,11 +38,11 @@ public class Events {
         this.title = title;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

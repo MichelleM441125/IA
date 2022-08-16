@@ -2,6 +2,7 @@ package com.example.ia;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -13,7 +14,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class SetPasscode extends AppCompatActivity {
 
     public EditText newPasscode;
-    private FirebaseAuth mAuth;
     private FirebaseFirestore firebase;
 
     @Override
@@ -22,7 +22,6 @@ public class SetPasscode extends AppCompatActivity {
         setContentView(R.layout.activity_set_passcode);
 
         newPasscode = findViewById(R.id.passcodeText);
-        mAuth = FirebaseAuth.getInstance();
         firebase = FirebaseFirestore.getInstance();
 
     }
@@ -40,7 +39,9 @@ public class SetPasscode extends AppCompatActivity {
 
             User currUser = new User(passcode, true);
 
-            firebase.collection("User").add(currUser);
+            firebase.collection("User").document("currUser").set(currUser);
+
+            startActivity(new Intent(this, Passcode.class));
 
         }
 
