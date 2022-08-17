@@ -1,4 +1,4 @@
-package com.example.ia;
+package com.example.ia.passcode;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +8,9 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.ia.Home;
+import com.example.ia.R;
+import com.example.ia.User;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.hanks.passcodeview.PasscodeView;
@@ -15,7 +18,6 @@ import com.hanks.passcodeview.PasscodeView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 public class Passcode extends AppCompatActivity {
 

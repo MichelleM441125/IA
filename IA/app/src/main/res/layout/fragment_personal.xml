@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PersonalFragment">
+    tools:context=".Fragments.Personal.PersonalFragment">
 
     <View
         android:id="@+id/view4"
@@ -99,9 +99,12 @@
         tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck,TouchTargetSizeCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="343dp"
-        android:layout_height="258dp"
+        android:id="@+id/personalRecylcerView"
+        android:layout_width="371dp"
+        android:layout_height="259dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="28dp"
+        android:layout_marginEnd="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

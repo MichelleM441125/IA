@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#EADDDD"
     android:backgroundTint="#FFFFFF"
-    tools:context=".SetPasscode">
+    tools:context=".passcode.SetPasscode">
 
     <TextView
         android:id="@+id/textView3"

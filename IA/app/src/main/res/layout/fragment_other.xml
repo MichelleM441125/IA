@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OtherFragment">
+    tools:context=".Fragments.Others.OtherFragment">
 
 
     <View
@@ -100,9 +100,12 @@
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="343dp"
-        android:layout_height="258dp"
+        android:id="@+id/otherRecyclerView"
+        android:layout_width="379dp"
+        android:layout_height="254dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="28dp"
+        android:layout_marginEnd="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

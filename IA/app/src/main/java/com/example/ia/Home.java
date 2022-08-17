@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.ia.R;
+import com.example.ia.Fragments.Main.MainWorkFragment;
+import com.example.ia.Fragments.Others.OtherFragment;
+import com.example.ia.Fragments.Personal.PersonalFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Home extends AppCompatActivity {
