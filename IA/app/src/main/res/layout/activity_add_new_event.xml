@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddNewEvent">
+    tools:context=".AddEvents">
 
     <TextView
         android:id="@+id/textView"
@@ -19,23 +19,9 @@
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:background="#FFFFFF"
-        android:onClick="goBackHome"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.302"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_keyboard_backspace_24"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck,TouchTargetSizeCheck" />
 
     <ImageButton
         android:id="@+id/imageButton3"
@@ -43,9 +29,9 @@
         android:layout_height="37dp"
         android:layout_marginTop="52dp"
         android:background="#FFFFFF"
-        android:onClick="addNewEvent"
+        android:onClick="addThisNewEvent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.687"
+        app:layout_constraintHorizontal_bias="0.573"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_check_24"
@@ -55,13 +41,12 @@
         android:id="@+id/textView2"
         android:layout_width="62dp"
         android:layout_height="31dp"
-        android:layout_marginTop="76dp"
-        android:text="TITLE:"
+        android:text="NAME:"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/NewEventTitleText"
-        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintEnd_toStartOf="@+id/NewEventNameText"
+        app:layout_constraintHorizontal_bias="0.316"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
+        tools:layout_editor_absoluteY="164dp" />
 
     <TextView
         android:id="@+id/textView4"
@@ -88,7 +73,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/NewEventTitleText"
+        android:id="@+id/NewEventNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
@@ -132,6 +117,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="36dp"
+        android:layout_marginEnd="20dp"
         android:ems="10"
         android:hint=" e.g: 2022-05-31"
         android:inputType="textPersonName"
@@ -140,8 +126,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/NewEventTitleText"
-        app:layout_constraintVertical_bias="0.063"
+        app:layout_constraintTop_toBottomOf="@+id/NewEventNameText"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="TouchTargetSizeCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

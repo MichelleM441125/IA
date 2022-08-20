@@ -9,6 +9,7 @@ public class Events {
     public String date;
     public String quote;
     public String days;
+    public String category;
     public ArrayList<Subevent> subEvents;
     public ArrayList<Diary> diaries;
 
@@ -18,12 +19,25 @@ public class Events {
     }
 
 
-    public Events(String title, String date, String quote, String days)
+    public Events(String title, String date, String quote, String days, String category)
     {
         this.title = title;
         this.date = date;
         this.quote = quote;
         this.days = days;
+        this.category = category;
+    }
+
+    public void setDays(String days) {
+        this.days = days;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getDays() {

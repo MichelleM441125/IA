@@ -86,7 +86,7 @@
         tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck,TouchTargetSizeCheck" />
 
     <ImageButton
-        android:id="@+id/imageButton15"
+        android:id="@+id/AddNewPersonalEventButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
