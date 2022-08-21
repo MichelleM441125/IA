@@ -4,6 +4,7 @@ package com.example.ia.Fragments.Personal;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,8 +15,14 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.example.ia.AddEvents;
+import com.example.ia.Events;
 import com.example.ia.Fragments.Main.MainAdapter;
 import com.example.ia.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -28,6 +35,10 @@ public class PersonalFragment extends Fragment {
     protected ArrayList<String> events;
     protected ArrayList<String> dates;
     protected ArrayList<String > days;
+
+    protected ArrayList<Events> allPersonalEvents;
+
+    private FirebaseFirestore firebase;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,18 +57,19 @@ public class PersonalFragment extends Fragment {
             }
         });
 
+        firebase = FirebaseFirestore.getInstance();
+
         events = new ArrayList<String>();
-        events.add("Birthday");
-        events.add("Buy fruits");
 
         dates = new ArrayList<String>();
-        dates.add("2022-08-27");
-        dates.add("2022-08-31");
-
+        
         days = new ArrayList<String>();
-        days.add("10");
-        days.add("15");
 
+
+        allPersonalEvents = new ArrayList<Events>();
+
+        getAndPopulateDate();
+        System.out.println(days);
 
         personalRecView = (RecyclerView)view.findViewById(R.id.personalRecylcerView);
         PersonalAdapter pAdapter = new PersonalAdapter(events, dates, days);
@@ -65,6 +77,39 @@ public class PersonalFragment extends Fragment {
         personalRecView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return view;
+    }
+
+    public void getAndPopulateDate()
+    {
+        firebase.collection("Personal").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task)
+                    {
+                        if(task.isSuccessful())
+                        {
+                            for (DocumentSnapshot ds : task.getResult().getDocuments())
+                            {
+                                // convert the vehicle documents to Vehicle type
+                                Events getEvents = ds.toObject(Events.class);
+                                // add them into the arraylist
+                                allPersonalEvents.add(getEvents);
+                            }
+                            // run through each vehicle in the arraylist to get their model, type, and status
+                            for(Events eachEvent : allPersonalEvents)
+                            {
+                                String eachEventName = eachEvent.getTitle();
+                                events.add(eachEventName);
+
+                                String eachDate = eachEvent.getDate();
+                                dates.add(eachDate);
+
+                                String eachDays = eachEvent.getDays();
+                                days.add(eachDays);
+                            }
+                        }
+                    }
+                });
     }
 
 }

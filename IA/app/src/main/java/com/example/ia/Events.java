@@ -19,13 +19,12 @@ public class Events {
     }
 
 
-    public Events(String title, String date, String quote, String days, String category)
+    public Events(String title, String date, String days,String quote)
     {
         this.title = title;
         this.date = date;
-        this.quote = quote;
         this.days = days;
-        this.category = category;
+        this.quote = quote;
     }
 
     public void setDays(String days) {

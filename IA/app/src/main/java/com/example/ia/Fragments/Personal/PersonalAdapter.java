@@ -49,4 +49,8 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalViewHolder>
     public int getItemCount() {
         return pEvents.size();
     }
+
+
+
+
 }
