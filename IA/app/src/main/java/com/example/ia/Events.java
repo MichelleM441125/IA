@@ -27,6 +27,16 @@ public class Events {
         this.quote = quote;
     }
 
+    @Override
+    public String toString() {
+        return "Events{" +
+                "title='" + title + '\'' +
+                ", date='" + date + '\'' +
+                ", quote='" + quote + '\'' +
+                ", days='" + days + '\'' +
+                '}';
+    }
+
     public void setDays(String days) {
         this.days = days;
     }

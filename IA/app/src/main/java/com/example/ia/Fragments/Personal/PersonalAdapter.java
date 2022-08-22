@@ -50,6 +50,13 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalViewHolder>
         return pEvents.size();
     }
 
+    public void newDate(ArrayList eventData, ArrayList dateData, ArrayList dayData)
+    {
+        pEvents = eventData;
+        pDates = dateData;
+        pDays = dayData;
+    }
+
 
 
 

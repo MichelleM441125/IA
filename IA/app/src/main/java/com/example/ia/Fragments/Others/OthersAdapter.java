@@ -49,5 +49,12 @@ public class OthersAdapter extends RecyclerView.Adapter<OthersViewHolder>
     public int getItemCount() {
         return oDates.size();
     }
+
+    public void newDate(ArrayList eventData, ArrayList dateData, ArrayList dayData)
+    {
+        oEvents = eventData;
+        oDates = dateData;
+        oDays = dayData;
+    }
 }
 

@@ -46,4 +46,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainViewHolder>
     public int getItemCount() {
         return mEvents.size();
     }
+
+    public void newDate(ArrayList eventData, ArrayList dateData, ArrayList dayData)
+    {
+        mEvents = eventData;
+        mDates = dateData;
+        mDays = dayData;
+    }
 }

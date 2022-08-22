@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.ia.AddEvents;
 import com.example.ia.Events;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 public class PersonalFragment extends Fragment {
 
     RecyclerView personalRecView;
+    PersonalAdapter pAdapter;
 
     //Data Arraylists:
     protected ArrayList<String> events;
@@ -62,19 +64,22 @@ public class PersonalFragment extends Fragment {
         events = new ArrayList<String>();
 
         dates = new ArrayList<String>();
-        
+
         days = new ArrayList<String>();
 
 
         allPersonalEvents = new ArrayList<Events>();
 
-        getAndPopulateDate();
         System.out.println(days);
 
         personalRecView = (RecyclerView)view.findViewById(R.id.personalRecylcerView);
-        PersonalAdapter pAdapter = new PersonalAdapter(events, dates, days);
+        pAdapter = new PersonalAdapter(events, dates, days);
         personalRecView.setAdapter(pAdapter);
         personalRecView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        getAndPopulateDate();
+
+        System.out.println(events + "EEE");
 
         return view;
     }
@@ -90,14 +95,15 @@ public class PersonalFragment extends Fragment {
                         {
                             for (DocumentSnapshot ds : task.getResult().getDocuments())
                             {
-                                // convert the vehicle documents to Vehicle type
+
                                 Events getEvents = ds.toObject(Events.class);
-                                // add them into the arraylist
                                 allPersonalEvents.add(getEvents);
                             }
-                            // run through each vehicle in the arraylist to get their model, type, and status
+
                             for(Events eachEvent : allPersonalEvents)
                             {
+                                System.out.println(eachEvent.toString() + "ZZZ");
+
                                 String eachEventName = eachEvent.getTitle();
                                 events.add(eachEventName);
 
@@ -107,6 +113,13 @@ public class PersonalFragment extends Fragment {
                                 String eachDays = eachEvent.getDays();
                                 days.add(eachDays);
                             }
+                            pAdapter.newDate(events, dates, days);
+                            pAdapter.notifyDataSetChanged();
+                        }
+                        else
+                        {
+                            Toast.makeText(getActivity(), "you don't have any events yet, " +
+                                    "go add some", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
