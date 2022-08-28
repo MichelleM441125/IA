@@ -16,12 +16,14 @@ public class MainAdapter extends RecyclerView.Adapter<MainViewHolder>
     ArrayList<String> mEvents;
     ArrayList<String> mDates;
     ArrayList<String> mDays;
+    private mainEventListener mainListener;
 
-    public MainAdapter(ArrayList events, ArrayList dates, ArrayList days)
+    public MainAdapter(ArrayList events, ArrayList dates, ArrayList days, mainEventListener mainListener1)
     {
         mEvents = events;
         mDates = dates;
         mDays = days;
+        mainListener = mainListener1;
     }
 
     @NonNull
@@ -29,7 +31,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainViewHolder>
     public MainViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         View mainView = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_view, parent, false);
-        MainViewHolder mainHolder = new MainViewHolder(mainView);
+        MainViewHolder mainHolder = new MainViewHolder(mainView, mainListener);
 
         return  mainHolder;
     }
@@ -53,4 +55,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainViewHolder>
         mDates = dateData;
         mDays = dayData;
     }
+
+    public interface mainEventListener
+    {
+        void mainEventOnClick(int position);
+    }
+
 }

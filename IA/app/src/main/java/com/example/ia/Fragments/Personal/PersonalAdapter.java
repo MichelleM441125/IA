@@ -17,12 +17,14 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalViewHolder>
     ArrayList<String> pEvents;
     ArrayList<String> pDates;
     ArrayList<String> pDays;
+    private personalEventListener personalListener;
 
-    public PersonalAdapter(ArrayList events, ArrayList dates, ArrayList days)
+    public PersonalAdapter(ArrayList events, ArrayList dates, ArrayList days, personalEventListener personalListener1)
     {
         pEvents = events;
         pDates = dates;
         pDays = days;
+        personalListener = personalListener1;
     }
 
 
@@ -31,7 +33,7 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalViewHolder>
     public PersonalViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         View personalView = LayoutInflater.from(parent.getContext()).inflate(R.layout.personal_view, parent, false);
-        PersonalViewHolder personalHolder = new PersonalViewHolder(personalView);
+        PersonalViewHolder personalHolder = new PersonalViewHolder(personalView, personalListener);
 
         return  personalHolder;
     }
@@ -57,7 +59,9 @@ public class PersonalAdapter extends RecyclerView.Adapter<PersonalViewHolder>
         pDays = dayData;
     }
 
-
-
+    public interface personalEventListener
+    {
+        void personalEventOnClick(int position);
+    }
 
 }

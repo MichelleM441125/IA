@@ -19,19 +19,21 @@ public class OthersAdapter extends RecyclerView.Adapter<OthersViewHolder>
     ArrayList<String> oEvents;
     ArrayList<String> oDates;
     ArrayList<String> oDays;
+    private otherEventListener otherListener;
 
-    public OthersAdapter(ArrayList events, ArrayList dates, ArrayList days)
+    public OthersAdapter(ArrayList events, ArrayList dates, ArrayList days, otherEventListener otherListener1)
     {
         oEvents = events;
         oDates = dates;
         oDays = days;
+        otherListener = otherListener1;
     }
 
     @NonNull
     @Override
     public OthersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View otherView = LayoutInflater.from(parent.getContext()).inflate(R.layout.other_view, parent, false);
-        OthersViewHolder othersViewHolder = new OthersViewHolder(otherView);
+        OthersViewHolder othersViewHolder = new OthersViewHolder(otherView, otherListener);
 
         return othersViewHolder;
     }
@@ -55,6 +57,11 @@ public class OthersAdapter extends RecyclerView.Adapter<OthersViewHolder>
         oEvents = eventData;
         oDates = dateData;
         oDays = dayData;
+    }
+
+    public interface  otherEventListener
+    {
+        void otherEventOnClick(int position);
     }
 }
 

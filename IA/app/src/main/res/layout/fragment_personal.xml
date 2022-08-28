@@ -19,11 +19,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/personalEventPresentDays"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="93dp"
-        android:text="3"
         android:textColor="#FFFFFF"
         android:textSize="96sp"
         android:textStyle="bold"
@@ -33,11 +32,10 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/personalEventPresentTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="199dp"
-        android:text="Birthday"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -46,12 +44,11 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView19"
+        android:id="@+id/personalEventPresentQuote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="244dp"
         android:fontFamily="cursive"
-        android:text="Happy Birthday MJ"
         android:textColor="#C57918"
         android:textSize="34sp"
         android:textStyle="bold"
@@ -60,11 +57,10 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/personalEventPresentDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="72dp"
-        android:text="2022-07-13"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"

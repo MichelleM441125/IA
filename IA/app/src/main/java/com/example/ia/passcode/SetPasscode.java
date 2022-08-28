@@ -38,9 +38,8 @@ public class SetPasscode extends AppCompatActivity {
         {
             String passcode = newPasscode.getText().toString();
 
-            User currUser = new User(passcode, true);
-
-            firebase.collection("User").document("currUser").set(currUser);
+            firebase.collection("User").document("currUser")
+                    .update("Passcode",passcode);
 
             startActivity(new Intent(this, Passcode.class));
 

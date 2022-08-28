@@ -15,6 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
 
@@ -60,6 +61,7 @@ public class AddEvents extends AppCompatActivity {
             String nameInput = newNameText.getText().toString();
             String dateInput = newDateText.getText().toString();
             String quoteInput = newQuoteText.getText().toString();
+            ArrayList<Diary> newDiaryList = new ArrayList<>();
 
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             try {
@@ -78,7 +80,7 @@ public class AddEvents extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            Events aNewEvent = new Events(nameInput, dateInput, daysDifference, quoteInput);
+            Events aNewEvent = new Events(nameInput, dateInput, daysDifference, quoteInput, newDiaryList);
 
             firebase.collection(newCategoryText).add(aNewEvent);
 

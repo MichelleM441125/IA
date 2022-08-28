@@ -12,11 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ia.AddEvents;
+import com.example.ia.EventProfileFolder.EventProfile;
 import com.example.ia.Events;
 import com.example.ia.R;
+import com.example.ia.passcode.SetPasscode;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -26,19 +29,26 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 
-public class MainWorkFragment extends Fragment {
+public class MainWorkFragment extends Fragment implements MainAdapter.mainEventListener {
 
     RecyclerView mainRecView;
     MainAdapter mAdapter;
 
     //Data Arraylists:
-    protected ArrayList<String> events;
-    protected ArrayList<String> dates;
-    protected ArrayList<String > days;
+    ArrayList<String> events;
+    ArrayList<String> dates;
+    ArrayList<String > days;
 
-    private FirebaseFirestore firebase;
-    protected ArrayList<Events> allMainEvents;
+    FirebaseFirestore firebase;
+    public static ArrayList<Events> allMainEvents;
     ArrayList<Integer> intDays;
+
+    TextView presentTitle;
+    TextView presentDate;
+    TextView presentDays;
+    TextView presentQuote;
+
+    public Events chosenEvent;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,7 +57,8 @@ public class MainWorkFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main_work, container, false);
 
         ImageButton ib = (ImageButton)view.findViewById(R.id.addMainEventButton);
-        ib.setOnClickListener(new View.OnClickListener() {
+        ib.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view)
             {
@@ -58,10 +69,20 @@ public class MainWorkFragment extends Fragment {
             }
         });
 
+        ImageButton set = (ImageButton)view.findViewById(R.id.settingButton);
+        set.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(getActivity(), SetPasscode.class);
+                startActivity(intent);
+            }
+        });
+
+
         events = new ArrayList<String>();
-
         dates = new ArrayList<String>();
-
         days = new ArrayList<String>();
 
         firebase = FirebaseFirestore.getInstance();
@@ -69,18 +90,25 @@ public class MainWorkFragment extends Fragment {
         allMainEvents = new ArrayList<Events>();
         intDays = new ArrayList<Integer>();
 
+        presentTitle = (TextView)view.findViewById(R.id.mainEventPresentTitle);
+        presentDate = (TextView)view.findViewById(R.id.mainEventPresentDate);
+        presentDays = (TextView)view.findViewById(R.id.mainEventPresentDays);
+        presentQuote = (TextView)view.findViewById(R.id.mainEventPresentQuote);
+
         mainRecView = (RecyclerView)view.findViewById(R.id.mainRecyclerView);
-        mAdapter = new MainAdapter(events, dates, days);
+        mAdapter = new MainAdapter(events, dates, days, this);
         mainRecView.setAdapter(mAdapter);
         mainRecView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        getAndPopulateDate();
-        showMostRecent();
+        chosenEvent = new Events();
+
+        getAndPopulateData();
 
         return view;
     }
 
-    public void getAndPopulateDate()
+
+    public void getAndPopulateData()
     {
         firebase.collection("Main").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -91,12 +119,12 @@ public class MainWorkFragment extends Fragment {
                         {
                             for (DocumentSnapshot ds : task.getResult().getDocuments())
                             {
-                                // convert the vehicle documents to Vehicle type
+                                // convert the documents to Events type
                                 Events getEvents = ds.toObject(Events.class);
                                 // add them into the arraylist
                                 allMainEvents.add(getEvents);
                             }
-                            // run through each vehicle in the arraylist to get their model, type, and status
+                            // run through each vehicle in the arraylist to get their title, date, and days
                             for(Events eachEvent : allMainEvents)
                             {
                                 String eachEventName = eachEvent.getTitle();
@@ -116,36 +144,53 @@ public class MainWorkFragment extends Fragment {
                             Toast.makeText(getActivity(), "you don't have any events yet, " +
                                     "go add some", Toast.LENGTH_SHORT).show();
                         }
+                        showMostRecent();
                     }
                 });
+
+
     }
 
     public void showMostRecent()
     {
 
-//        intDays.add(6);
-//        intDays.add(9);
-//        intDays.add(8);
-
         for(String d : days)
         {
-            System.out.println("III" + d);
             int i = Integer.parseInt(d);
-            System.out.println("III" + i);
             intDays.add(i);
         }
 
-//        int minimum = intDays.get(0);
-//        for (int i = 1; i < intDays.size(); i++)
-//        {
-//            if (minimum > intDays.get(i))
-//            {
-//                minimum = intDays.get(i);
-//            }
-//        }
-//        System.out.println("MMM" + minimum);
+        int minimum = intDays.get(0);
+        for (int i = 1; i < intDays.size(); i++)
+        {
+            if (minimum > intDays.get(i))
+            {
+                minimum = intDays.get(i);
+            }
+        }
+
+        for(Events e : allMainEvents)
+        {
+            String min = e.getDays();
+            if(min.equals(String.valueOf(minimum)))
+            {
+                presentTitle.setText(e.getTitle());
+                presentDate.setText(e.getDate());
+                presentDays.setText(e.getDays());
+                presentQuote.setText(e.getQuote());
+            }
+        }
     }
 
 
+    @Override
+    public void mainEventOnClick(int position)
+    {
+        chosenEvent = allMainEvents.get(position);
+        System.out.println(chosenEvent.toString());
+        Intent intent = new Intent(getActivity(), EventProfile.class);
+        intent.putExtra("sentEV", chosenEvent.toString());
+        startActivity(intent);
+    }
 }
 

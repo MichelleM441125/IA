@@ -43,11 +43,34 @@ public class Passcode extends AppCompatActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
-                    User thisUser = document.toObject(User.class);
                     Log.d("getData", "DocumentSnapshot data: " + document.getData());
 
-                    code = thisUser.getPasscode();
+                    String dddd = document.getData().toString();
+                    code = dddd.substring(dddd.indexOf("=")+1, dddd.indexOf("}"));
+                    System.out.println(code);
+                    // to set length of password as here
+                    // we have set the length as 4 digits
+                    passcodeView.setPasscodeLength(4)
+                            // to set  passcode
+                            .setLocalPasscode(code)
 
+                            // to set listener to it to check whether
+                            // passwords has matched or failed
+                            .setListener(new PasscodeView.PasscodeViewListener() {
+                                @Override
+                                public void onFail() {
+                                    // to show message when Password is incorrect
+                                    Toast.makeText(Passcode.this, "Password is wrong!", Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onSuccess(String number) {
+                                    // here is used so that when password
+                                    // is correct user will be directly navigated to next activity
+                                    Intent intent_passcode = new Intent(Passcode.this, Home.class);
+                                    startActivity(intent_passcode);
+                                }
+                            });
                 } else {
                     Log.d("getData", "No such document");
                 }
@@ -55,29 +78,7 @@ public class Passcode extends AppCompatActivity {
         });
 
 
-        // to set length of password as here
-        // we have set the length as 4 digits
-        passcodeView.setPasscodeLength(4)
-                // to set  passcode
-                .setLocalPasscode("0713")
 
-                // to set listener to it to check whether
-                // passwords has matched or failed
-                .setListener(new PasscodeView.PasscodeViewListener() {
-                    @Override
-                    public void onFail() {
-                        // to show message when Password is incorrect
-                        Toast.makeText(Passcode.this, "Password is wrong!", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onSuccess(String number) {
-                        // here is used so that when password
-                        // is correct user will be directly navigated to next activity
-                        Intent intent_passcode = new Intent(Passcode.this, Home.class);
-                        startActivity(intent_passcode);
-                    }
-                });
         }
     }
 

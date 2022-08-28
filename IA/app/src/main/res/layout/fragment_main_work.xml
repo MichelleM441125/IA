@@ -7,7 +7,7 @@
     tools:context=".Fragments.Main.MainWorkFragment">
 
     <View
-        android:id="@+id/homeQuoteText"
+        android:id="@+id/dd"
         android:layout_width="478dp"
         android:layout_height="372dp"
         android:layout_marginStart="3dp"
@@ -21,13 +21,12 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/imageButton9"
+        android:id="@+id/settingButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:background="#D6B34C"
-        android:onClick="goResetPasscode"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_settings_24"
@@ -48,60 +47,56 @@
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <TextView
-        android:id="@+id/mainQuoteText"
+        android:id="@+id/mainEventPresentQuote"
         android:layout_width="314dp"
         android:layout_height="39dp"
         android:layout_marginBottom="12dp"
         android:fontFamily="cursive"
-        android:text="Keep Going"
         android:textAlignment="center"
         android:textColor="#98760F"
         android:textSize="34sp"
         android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/mainEventNameText"
+        app:layout_constraintBottom_toTopOf="@+id/mainEventPresentTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/mainEventNameText"
+        android:id="@+id/mainEventPresentTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="199dp"
-        android:text="Bio Test"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/homeQuoteText"
+        app:layout_constraintBottom_toBottomOf="@+id/dd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/mainDateText"
+        android:id="@+id/mainEventPresentDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="72dp"
-        android:text="2022-05-31"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/homeQuoteText"
+        app:layout_constraintBottom_toBottomOf="@+id/dd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/mainDaysText"
+        android:id="@+id/mainEventPresentDays"
         android:layout_width="53dp"
         android:layout_height="128dp"
         android:layout_marginBottom="93dp"
-        android:text="2"
         android:textColor="#FFFFFF"
         android:textSize="96sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/homeQuoteText"
+        app:layout_constraintBottom_toBottomOf="@+id/dd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -116,7 +111,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homeQuoteText"
+        app:layout_constraintTop_toBottomOf="@+id/dd"
         app:layout_constraintVertical_bias="0.0" />
 
 

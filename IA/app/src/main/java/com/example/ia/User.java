@@ -11,10 +11,9 @@ public class User {
 
     }
 
-    public User(String passcode, boolean isLogIn)
+    public User(String passcode)
     {
         this.passcode = passcode;
-        this.isLogIn = isLogIn;
     }
 
     public String getPasscode()
@@ -22,15 +21,4 @@ public class User {
         return passcode;
     }
 
-    public boolean getIsLogIn() {
-        return isLogIn;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "passcode='" + passcode + '\'' +
-                ", isLogIn=" + isLogIn +
-                '}';
-    }
 }

@@ -13,12 +13,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ia.AddEvents;
+import com.example.ia.EventProfileFolder.EventProfile;
 import com.example.ia.Events;
-import com.example.ia.Fragments.Main.MainAdapter;
 import com.example.ia.R;
+import com.example.ia.passcode.SetPasscode;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -28,7 +30,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 
-public class PersonalFragment extends Fragment {
+public class PersonalFragment extends Fragment implements PersonalAdapter.personalEventListener {
 
     RecyclerView personalRecView;
     PersonalAdapter pAdapter;
@@ -38,9 +40,18 @@ public class PersonalFragment extends Fragment {
     protected ArrayList<String> dates;
     protected ArrayList<String > days;
 
-    protected ArrayList<Events> allPersonalEvents;
+    public static ArrayList<Events> allPersonalEvents;
 
     private FirebaseFirestore firebase;
+
+    ArrayList<Integer> intDays;
+
+    TextView presentTitle;
+    TextView presentDate;
+    TextView presentDays;
+    TextView presentQuote;
+
+    public Events chosenEvent;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,27 +70,39 @@ public class PersonalFragment extends Fragment {
             }
         });
 
-        firebase = FirebaseFirestore.getInstance();
+        ImageButton set = (ImageButton)view.findViewById(R.id.imageButton13);
+        set.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(getActivity(), SetPasscode.class);
+                startActivity(intent);
+            }
+        });
 
         events = new ArrayList<String>();
-
         dates = new ArrayList<String>();
-
         days = new ArrayList<String>();
 
+        firebase = FirebaseFirestore.getInstance();
 
         allPersonalEvents = new ArrayList<Events>();
+        intDays = new ArrayList<Integer>();
 
-        System.out.println(days);
+        presentTitle = (TextView)view.findViewById(R.id.personalEventPresentTitle);
+        presentDate = (TextView)view.findViewById(R.id.personalEventPresentDate);
+        presentDays = (TextView)view.findViewById(R.id.personalEventPresentDays);
+        presentQuote = (TextView)view.findViewById(R.id.personalEventPresentQuote);
 
         personalRecView = (RecyclerView)view.findViewById(R.id.personalRecylcerView);
-        pAdapter = new PersonalAdapter(events, dates, days);
+        pAdapter = new PersonalAdapter(events, dates, days,this);
         personalRecView.setAdapter(pAdapter);
         personalRecView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        getAndPopulateDate();
+        chosenEvent = new Events();
 
-        System.out.println(events + "EEE");
+        getAndPopulateDate();
 
         return view;
     }
@@ -102,7 +125,6 @@ public class PersonalFragment extends Fragment {
 
                             for(Events eachEvent : allPersonalEvents)
                             {
-                                System.out.println(eachEvent.toString() + "ZZZ");
 
                                 String eachEventName = eachEvent.getTitle();
                                 events.add(eachEventName);
@@ -115,14 +137,57 @@ public class PersonalFragment extends Fragment {
                             }
                             pAdapter.newDate(events, dates, days);
                             pAdapter.notifyDataSetChanged();
+
                         }
                         else
                         {
                             Toast.makeText(getActivity(), "you don't have any events yet, " +
                                     "go add some", Toast.LENGTH_SHORT).show();
                         }
+
                     }
                 });
     }
 
+    public void showMostRecent()
+    {
+
+        for(String d : days)
+        {
+            int i = Integer.parseInt(d);
+            intDays.add(i);
+        }
+
+        int minimum = intDays.get(0);
+        for (int i = 1; i < intDays.size(); i++)
+        {
+            if (minimum > intDays.get(i))
+            {
+                minimum = intDays.get(i);
+            }
+        }
+
+        for(Events e : allPersonalEvents)
+        {
+            String min = e.getDays();
+            if(min.equals(String.valueOf(minimum)))
+            {
+                presentTitle.setText(e.getTitle());
+                presentDate.setText(e.getDate());
+                presentDays.setText(e.getDays());
+                presentQuote.setText(e.getQuote());
+            }
+        }
+    }
+
+
+    @Override
+    public void personalEventOnClick(int position)
+    {
+        chosenEvent = allPersonalEvents.get(position);
+        System.out.println(chosenEvent.toString());
+        Intent intent = new Intent(getActivity(), EventProfile.class);
+        intent.putExtra("sentEV", chosenEvent.toString());
+        startActivity(intent);
+    }
 }

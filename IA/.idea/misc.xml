@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../../../layout/custom_preview.xml" value="0.2713541666666667" />
+        <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.27239583333333334" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.14739583333333334" />
+        <entry key="app/src/main/res/layout-w1240dp/activity_edit_diary.xml" value="0.133203125" />
+        <entry key="app/src/main/res/layout-w936dp/activity_edit_diary.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_academic.xml" value="0.24444444444444444" />
+        <entry key="app/src/main/res/layout/activity_add_new_diary.xml" value="0.25625" />
+        <entry key="app/src/main/res/layout/activity_add_new_event.xml" value="0.24244137237801094" />
+        <entry key="app/src/main/res/layout/activity_add_new_sub_event.xml" value="0.2523076923076923" />
+        <entry key="app/src/main/res/layout/activity_all_category.xml" value="0.25625" />
+        <entry key="app/src/main/res/layout/activity_cat.xml" value="0.25625" />
+        <entry key="app/src/main/res/layout/activity_cate.xml" value="0.24166666666666667" />
+        <entry key="app/src/main/res/layout/activity_categories.xml" value="0.32586345446587517" />
+        <entry key="app/src/main/res/layout/activity_category.xml" value="0.22037037037037038" />
+        <entry key="app/src/main/res/layout/activity_diary_all.xml" value="0.2849150849750495" />
+        <entry key="app/src/main/res/layout/activity_diary_profile.xml" value="0.24166666666666667" />
+        <entry key="app/src/main/res/layout/activity_edit_diary.xml" value="0.25625" />
+        <entry key="app/src/main/res/layout/activity_edit_passcode.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_event_profile.xml" value="0.25625" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.27348184660024766" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2262633733313552" />
+        <entry key="app/src/main/res/layout/activity_passcode.xml" value="0.24666386993062103" />
+        <entry key="app/src/main/res/layout/activity_set_passcode.xml" value="0.25625" />
+        <entry key="app/src/main/res/layout/activity_work_category.xml" value="0.23794871794871794" />
+        <entry key="app/src/main/res/layout/diary_view.xml" value="0.42607677911088015" />
+        <entry key="app/src/main/res/layout/fragment_main_work.xml" value="0.23615160349854228" />
+        <entry key="app/src/main/res/layout/fragment_other.xml" value="0.363005103716987" />
+        <entry key="app/src/main/res/layout/fragment_personal.xml" value="0.47156957102028674" />
+        <entry key="app/src/main/res/layout/home_rec_view.xml" value="0.3055747714842858" />
+        <entry key="app/src/main/res/layout/main_view.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/other_view.xml" value="0.25625" />
+        <entry key="app/src/main/res/layout/personal_view.xml" value="0.3515361279678918" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.24444444444444444" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

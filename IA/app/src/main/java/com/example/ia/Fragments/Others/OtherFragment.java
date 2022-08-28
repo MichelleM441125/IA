@@ -12,12 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ia.AddEvents;
+import com.example.ia.EventProfileFolder.EventProfile;
 import com.example.ia.Events;
-import com.example.ia.Fragments.Main.MainAdapter;
 import com.example.ia.R;
+import com.example.ia.passcode.SetPasscode;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -27,7 +29,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 
-public class OtherFragment extends Fragment {
+public class OtherFragment extends Fragment implements OthersAdapter.otherEventListener {
 
     RecyclerView recView;
     OthersAdapter oAdapter;
@@ -38,7 +40,15 @@ public class OtherFragment extends Fragment {
     protected ArrayList<String > days;
 
     private FirebaseFirestore firebase;
-    protected ArrayList<Events> allOtherEvents;
+    public static ArrayList<Events> allOtherEvents;
+    ArrayList<Integer> intDays;
+
+    TextView presentTitle;
+    TextView presentDate;
+    TextView presentDays;
+    TextView presentQuote;
+
+    public Events chosenEvent;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,20 +67,37 @@ public class OtherFragment extends Fragment {
             }
         });
 
+        ImageButton set = (ImageButton)view.findViewById(R.id.imageButton10);
+        set.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(getActivity(), SetPasscode.class);
+                startActivity(intent);
+            }
+        });
+
         events = new ArrayList<String>();
-
         dates = new ArrayList<String>();
-
         days = new ArrayList<String>();
-
-        recView = (RecyclerView)view.findViewById(R.id.otherRecyclerView);
-        oAdapter = new OthersAdapter(events, dates, days);
-        recView.setAdapter(oAdapter);
-        recView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         firebase = FirebaseFirestore.getInstance();
 
         allOtherEvents = new ArrayList<Events>();
+        intDays = new ArrayList<Integer>();
+
+        presentTitle = (TextView)view.findViewById(R.id.otherEventPresentTitle);
+        presentDate = (TextView)view.findViewById(R.id.otherEventPresentDate);
+        presentDays = (TextView)view.findViewById(R.id.otherEventPresentDays);
+        presentQuote = (TextView)view.findViewById(R.id.otherEventPresentQuote);
+
+        recView = (RecyclerView)view.findViewById(R.id.otherRecyclerView);
+        oAdapter = new OthersAdapter(events, dates, days,this);
+        recView.setAdapter(oAdapter);
+        recView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        chosenEvent = new Events();
 
         getAndPopulateDate();
 
@@ -113,9 +140,50 @@ public class OtherFragment extends Fragment {
                             Toast.makeText(getActivity(), "you don't have any events yet, " +
                                     "go add some", Toast.LENGTH_SHORT).show();
                         }
+                        showMostRecent();
                     }
                 });
     }
 
+    public void showMostRecent()
+    {
+
+        for(String d : days)
+        {
+            int i = Integer.parseInt(d);
+            intDays.add(i);
+        }
+
+        int minimum = intDays.get(0);
+        for (int i = 1; i < intDays.size(); i++)
+        {
+            if (minimum > intDays.get(i))
+            {
+                minimum = intDays.get(i);
+            }
+        }
+
+        for(Events e : allOtherEvents)
+        {
+            String min = e.getDays();
+            if(min.equals(String.valueOf(minimum)))
+            {
+                presentTitle.setText(e.getTitle());
+                presentDate.setText(e.getDate());
+                presentDays.setText(e.getDays());
+                presentQuote.setText(e.getQuote());
+            }
+        }
+    }
+
+
+    @Override
+    public void otherEventOnClick(int position)
+    {
+        chosenEvent = allOtherEvents.get(position);
+        Intent intent = new Intent(getActivity(), EventProfile.class);
+        intent.putExtra("sentEV", chosenEvent.toString());
+        startActivity(intent);
+    }
 }
 

@@ -1,7 +1,6 @@
 package com.example.ia;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Events {
 
@@ -19,12 +18,13 @@ public class Events {
     }
 
 
-    public Events(String title, String date, String days,String quote)
+    public Events(String title, String date, String days, String quote,ArrayList diaries)
     {
         this.title = title;
         this.date = date;
         this.days = days;
         this.quote = quote;
+        this.diaries = diaries;
     }
 
     @Override
@@ -32,8 +32,8 @@ public class Events {
         return "Events{" +
                 "title='" + title + '\'' +
                 ", date='" + date + '\'' +
-                ", quote='" + quote + '\'' +
-                ", days='" + days + '\'' +
+                "; quote='" + quote + '\'' +
+                ": days='" + days + '\'' +
                 '}';
     }
 
