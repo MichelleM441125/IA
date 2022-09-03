@@ -62,41 +62,6 @@ public class MainActivity extends AppCompatActivity {
         todayQuote = findViewById(R.id.quote);
         todayQuote.setText(thisQuote);
 
-//        mAuth.signInWithEmailAndPassword("mjie963@gmail.com", "Mj123456")
-//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if (task.isSuccessful()) {
-//                            // Sign in success, update UI with the signed-in user's information
-//                            FirebaseUser user = mAuth.getCurrentUser();
-//                        } else {
-//                            // If sign in fails, display a message to the user.
-//                            Toast.makeText(MainActivity.this, "Authentication failed.",
-//                                    Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-
-//        DocumentReference docRef = firebase.collection("User").document("currUser");
-//        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    DocumentSnapshot document = task.getResult();
-//                    if (document.exists()) {
-//                        Log.d("XXX", "DocumentSnapshot data: " + document.getData());
-//                        haha = "yes";
-//                    } else {
-//                        Log.d("XXX", "No such document");
-//                        haha = "no";
-//                    }
-//                } else {
-//                    Log.d("XXX", "get failed with ", task.getException());
-//                    haha = "no";
-//                }
-//            }
-//        });
-
         int timeout = 4000; // make the activity visible for 4 seconds
 
         Timer timer = new Timer();
@@ -107,17 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 finish();
                 Intent homepage = new Intent(MainActivity.this, Passcode.class);
                 startActivity(homepage);
-//                if(haha.equals("yes"))
-//                {
-//                    Intent homepage = new Intent(MainActivity.this, Passcode.class);
-//                    startActivity(homepage);
-//                }
-//                else
-//                {
-//                    Intent homepage = new Intent(MainActivity.this, SetPasscode.class);
-//                    startActivity(homepage);
-//                }
-//
+
             }
         }, timeout);
     }
