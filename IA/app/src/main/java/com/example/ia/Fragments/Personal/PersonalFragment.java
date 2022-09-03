@@ -144,13 +144,14 @@ public class PersonalFragment extends Fragment implements PersonalAdapter.person
                             Toast.makeText(getActivity(), "you don't have any events yet, " +
                                     "go add some", Toast.LENGTH_SHORT).show();
                         }
-
+                        showMostRecent();
                     }
                 });
     }
 
     public void showMostRecent()
     {
+
 
         for(String d : days)
         {
@@ -185,7 +186,7 @@ public class PersonalFragment extends Fragment implements PersonalAdapter.person
     public void personalEventOnClick(int position)
     {
         chosenEvent = allPersonalEvents.get(position);
-        System.out.println(chosenEvent.toString());
+
         Intent intent = new Intent(getActivity(), EventProfile.class);
         intent.putExtra("sentEV", chosenEvent.toString());
         startActivity(intent);

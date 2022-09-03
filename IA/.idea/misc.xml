@@ -20,16 +20,16 @@
         <entry key="app/src/main/res/layout/activity_diary_all.xml" value="0.2849150849750495" />
         <entry key="app/src/main/res/layout/activity_diary_profile.xml" value="0.24166666666666667" />
         <entry key="app/src/main/res/layout/activity_edit_diary.xml" value="0.25625" />
-        <entry key="app/src/main/res/layout/activity_edit_passcode.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_edit_passcode.xml" value="0.19574032418717732" />
         <entry key="app/src/main/res/layout/activity_event_profile.xml" value="0.25625" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.27348184660024766" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2262633733313552" />
         <entry key="app/src/main/res/layout/activity_passcode.xml" value="0.24666386993062103" />
         <entry key="app/src/main/res/layout/activity_set_passcode.xml" value="0.25625" />
         <entry key="app/src/main/res/layout/activity_work_category.xml" value="0.23794871794871794" />
-        <entry key="app/src/main/res/layout/diary_view.xml" value="0.42607677911088015" />
+        <entry key="app/src/main/res/layout/diary_view.xml" value="0.3474676704990082" />
         <entry key="app/src/main/res/layout/fragment_main_work.xml" value="0.23615160349854228" />
-        <entry key="app/src/main/res/layout/fragment_other.xml" value="0.363005103716987" />
+        <entry key="app/src/main/res/layout/fragment_other.xml" value="0.20055707532754027" />
         <entry key="app/src/main/res/layout/fragment_personal.xml" value="0.47156957102028674" />
         <entry key="app/src/main/res/layout/home_rec_view.xml" value="0.3055747714842858" />
         <entry key="app/src/main/res/layout/main_view.xml" value="0.1" />

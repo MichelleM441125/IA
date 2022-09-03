@@ -91,7 +91,8 @@ public class EventProfile extends AppCompatActivity implements diaryAdapter.diar
         });
 
         ImageButton button = (ImageButton)this.findViewById(R.id.imageButton4);
-        button.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view)
             {
@@ -116,131 +117,120 @@ public class EventProfile extends AppCompatActivity implements diaryAdapter.diar
                                                     public void onSuccess(Void aVoid) {
                                                         Log.d("delete", "DocumentSnapshot successfully deleted!");
                                                     }
-                                                })
-                                                .addOnFailureListener(new OnFailureListener() {
+                                                }).addOnFailureListener(new OnFailureListener() {
                                                     @Override
                                                     public void onFailure(@NonNull Exception e) {
                                                         Log.w("delete", "Error deleting document", e);
                                                     }
                                                 });
-                                        finish();
                                     }
                                 }
                             }
                         });
-
+                        finish();
                     }
 
                 }
 
-                // for Other Events
-                for(Events o : OtherFragment.allOtherEvents)
-                {
-                    String deleteTitle = o.getTitle();
-
-                    if(deleteTitle.equals(title1))
-                    {
-                        firebase.collection("Other").whereEqualTo("title", title1)
-                                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    for (DocumentSnapshot ds : task.getResult().getDocuments()) {
-                                        String idd = ds.getId();
-
-                                        firebase.collection("Other").document(idd)
-                                                .delete()
-                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void aVoid) {
-                                                        Log.d("delete", "DocumentSnapshot successfully deleted!");
-                                                    }
-                                                })
-                                                .addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                        Log.w("delete", "Error deleting document", e);
-                                                    }
-                                                });
-                                        finish();
-                                    }
-                                }
-                            }
-                        });
-
-                    }
-
-                }
-
-                // for Personal Events
-
-                for(Events p : PersonalFragment.allPersonalEvents)
-                {
-                    String deleteTitle = p.getTitle();
-
-                    if(deleteTitle.equals(title1))
-                    {
-                        firebase.collection("Personal").whereEqualTo("title", title1)
-                                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    for (DocumentSnapshot ds : task.getResult().getDocuments()) {
-                                        String idd = ds.getId();
-                                        firebase.collection("Personal").document(idd)
-                                                .delete()
-                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void aVoid) {
-                                                        Log.d("delete", "DocumentSnapshot successfully deleted!");
-                                                    }
-                                                })
-                                                .addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                        Log.w("delete", "Error deleting document", e);
-                                                    }
-                                                });
-                                        finish();
-                                    }
-                                }
-                            }
-                        });
-
-                    }
-
-                }
-
+//                // for Other Events
+//                for(Events o : OtherFragment.allOtherEvents)
+//                {
+//                    String deleteTitle = o.getTitle();
+//
+//                    if(deleteTitle.equals(title1))
+//                    {
+//                        firebase.collection("Other").whereEqualTo("title", title1)
+//                                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                                if (task.isSuccessful()) {
+//                                    for (DocumentSnapshot ds : task.getResult().getDocuments()) {
+//                                        String idd = ds.getId();
+//
+//                                        firebase.collection("Other").document(idd)
+//                                                .delete()
+//                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                                    @Override
+//                                                    public void onSuccess(Void aVoid) {
+//                                                        Log.d("delete", "DocumentSnapshot successfully deleted!");
+//                                                    }
+//                                                })
+//                                                .addOnFailureListener(new OnFailureListener() {
+//                                                    @Override
+//                                                    public void onFailure(@NonNull Exception e) {
+//                                                        Log.w("delete", "Error deleting document", e);
+//                                                    }
+//                                                });
+//                                    }
+//                                }
+//                            }
+//                        });
+//
+//                    }
+//
+//                }
+//
+//                // for Personal Events
+//
+//                for(Events p : PersonalFragment.allPersonalEvents)
+//                {
+//                    String deleteTitle = p.getTitle();
+//
+//                    if(deleteTitle.equals(title1))
+//                    {
+//                        firebase.collection("Personal").whereEqualTo("title", title1)
+//                                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                                if (task.isSuccessful()) {
+//                                    for (DocumentSnapshot ds : task.getResult().getDocuments()) {
+//                                        String idd = ds.getId();
+//                                        firebase.collection("Personal").document(idd)
+//                                                .delete()
+//                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                                    @Override
+//                                                    public void onSuccess(Void aVoid) {
+//                                                        Log.d("delete", "DocumentSnapshot successfully deleted!");
+//                                                    }
+//                                                })
+//                                                .addOnFailureListener(new OnFailureListener() {
+//                                                    @Override
+//                                                    public void onFailure(@NonNull Exception e) {
+//                                                        Log.w("delete", "Error deleting document", e);
+//                                                    }
+//                                                });
+//                                    }
+//                                }
+//                            }
+//                        });
+//
+//                    }
+//
+//                }
 
             }
         });
     }
 
-    public void getAndPopulateData()
+    public void getAndPopulateDataMain()
     {
         firebase.collection("Main").whereEqualTo("title", title1).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task)
-                    {
-                        if(task.isSuccessful())
-                        {
-                            for (DocumentSnapshot ds : task.getResult().getDocuments())
-                            {
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot ds : task.getResult().getDocuments()) {
 
                                 Events getEvents = ds.toObject(Events.class);
                                 d = getEvents.getDiaries();
-                                for(Diary dd : d)
-                                {
+                                for (Diary dd : d) {
                                     dates.add(dd.getDiaryDate());
                                 }
                                 dAdapter.newData(dates);
                                 dAdapter.notifyDataSetChanged();
 
                             }
-                        }
-                        else
-                        {
+                        } else {
                             Toast.makeText(getApplicationContext(), "you don't have any diary yet, " +
                                     "go add some", Toast.LENGTH_SHORT).show();
                         }
@@ -248,36 +238,36 @@ public class EventProfile extends AppCompatActivity implements diaryAdapter.diar
                     }
                 });
 
+    }
 
+    public void getAndPopulateDataPersonal() {
         firebase.collection("Personal").whereEqualTo("title", title1).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task)
-                    {
-                        if(task.isSuccessful())
-                        {
-                            for (DocumentSnapshot ds : task.getResult().getDocuments())
-                            {
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot ds : task.getResult().getDocuments()) {
 
                                 Events getEvents = ds.toObject(Events.class);
                                 d = getEvents.getDiaries();
-                                for(Diary dd : d)
-                                {
+                                for (Diary dd : d) {
                                     dates.add(dd.getDiaryDate());
                                 }
                                 dAdapter.newData(dates);
                                 dAdapter.notifyDataSetChanged();
 
                             }
-                        }
-                        else
-                        {
+                        } else {
                             Toast.makeText(getApplicationContext(), "you don't have any diary yet, " +
                                     "go add some", Toast.LENGTH_SHORT).show();
                         }
 
                     }
                 });
+    }
+
+    public void getAndPopulateDataOther()
+    {
 
         firebase.collection("Other").whereEqualTo("title", title1).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -295,6 +285,7 @@ public class EventProfile extends AppCompatActivity implements diaryAdapter.diar
                                 {
                                     dates.add(dd.getDiaryDate());
                                 }
+
                                 dAdapter.newData(dates);
                                 dAdapter.notifyDataSetChanged();
 
@@ -322,15 +313,17 @@ public class EventProfile extends AppCompatActivity implements diaryAdapter.diar
         day1 = chosenEV.substring(chosenEV.lastIndexOf(":")+ 8, chosenEV.lastIndexOf("'"));
         chosenDays.setText(day1);
 
-        getAndPopulateData();
+        getAndPopulateDataMain();
+        getAndPopulateDataPersonal();
+        getAndPopulateDataOther();
     }
 
     @Override
     public void diaryOnClick(int position)
     {
         chosenDiary = d.get(position);
-        System.out.println(chosenDiary.toString());
-        Intent intent = new Intent(this, DiaryProfile.class);
+        System.out.println("chosenD" + chosenDiary.toString());
+        Intent intent = new Intent(EventProfile.this, DiaryProfile.class);
         intent.putExtra("sentDiary", chosenDiary.toString());
         startActivity(intent);
     }

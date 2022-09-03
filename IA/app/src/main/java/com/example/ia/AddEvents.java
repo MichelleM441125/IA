@@ -3,6 +3,7 @@ package com.example.ia;
 import android.content.Intent;
 import android.media.metrics.Event;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -56,7 +57,13 @@ public class AddEvents extends AppCompatActivity {
 
     public void addThisNewEvent(View x)
     {
-        if(newNameText != null && newDateText != null && newQuoteText != null )
+        if(TextUtils.isEmpty(newNameText.getText().toString()) || TextUtils.isEmpty(newDateText.getText().toString())
+                || TextUtils.isEmpty(newQuoteText.getText().toString()))
+        {
+            Toast.makeText(getApplicationContext(),"Please fill in all the info",
+                    Toast.LENGTH_SHORT).show();
+        }
+        else
         {
             String nameInput = newNameText.getText().toString();
             String dateInput = newDateText.getText().toString();
@@ -76,7 +83,8 @@ public class AddEvents extends AppCompatActivity {
                 long differenceDates = difference / (24 * 60 * 60 * 1000);
                 daysDifference = Long.toString(differenceDates);
 
-            } catch (ParseException e) {
+            } catch (ParseException e)
+            {
                 e.printStackTrace();
             }
 
@@ -89,11 +97,6 @@ public class AddEvents extends AppCompatActivity {
 
             finish();
 
-        }
-        else
-        {
-            Toast.makeText(getApplicationContext(),"Please fill in all the info",
-                    Toast.LENGTH_SHORT).show();
         }
 
     }

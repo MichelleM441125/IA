@@ -182,7 +182,6 @@ public class MainWorkFragment extends Fragment implements MainAdapter.mainEventL
         }
     }
 
-
     @Override
     public void mainEventOnClick(int position)
     {

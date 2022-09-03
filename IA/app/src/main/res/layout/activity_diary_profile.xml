@@ -54,7 +54,7 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
-        android:id="@+id/imageButton8"
+        android:id="@+id/editDiaryButton"
         android:layout_width="44dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"

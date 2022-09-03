@@ -2,9 +2,14 @@ package com.example.ia.EventProfileFolder;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.ia.AddEvents;
+import com.example.ia.EditDiary;
 import com.example.ia.R;
 
 public class DiaryProfile extends AppCompatActivity {
@@ -20,12 +25,22 @@ public class DiaryProfile extends AppCompatActivity {
 
         Bundle mg= getIntent().getExtras();
         thisDiary = mg.getString("sentDiary");
-        System.out.print("SSSSS" + thisDiary);
 
         profileDate = findViewById(R.id.textView8);
         profileContent = findViewById(R.id.textView9);
 
         update();
+
+        ImageButton button = this.findViewById(R.id.editDiaryButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(DiaryProfile.this, EditDiary.class);
+                intent.putExtra("editDiary", thisDiary);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -34,8 +49,7 @@ public class DiaryProfile extends AppCompatActivity {
         String showDate = thisDiary.substring(thisDiary.indexOf("'", 5 ) + 1 , thisDiary.lastIndexOf("',"));
         profileDate.setText(showDate);
 
-        String conTent = thisDiary.substring(thisDiary.lastIndexOf("=") + 1, thisDiary.lastIndexOf("'"));
+        String conTent = thisDiary.substring(thisDiary.lastIndexOf("=") + 2, thisDiary.lastIndexOf("'"));
         profileContent.setText(conTent);
-
     }
 }
