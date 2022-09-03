@@ -116,81 +116,81 @@ public class EditDiary extends AppCompatActivity {
                 }
             }
 
-//             for (Events p : PersonalFragment.allPersonalEvents)
-//             {
-//                 ArrayList<Diary> pDList = p.getDiaries();
-//                 String peTitle = p.getTitle();
-//
-//                 for (Diary pD : pDList)
-//                 {
-//                     String pContent = pD.getWords();
-//                     if (oC.equals(pContent))
-//                     {
-//                         ev = p;
-//                         pD.setWords(nC);
-//                         p.setDiaries(pDList);
-//
-//                         System.out.println("newList " + pDList.toString());
-//
-//                         firebase.collection("Personal").whereEqualTo("title", peTitle)
-//                                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
-//                         {
-//                                @Override
-//                                public void onComplete(@NonNull Task<QuerySnapshot> task)
-//                                {
-//                                    for (DocumentSnapshot ds : task.getResult().getDocuments())
-//                                    {
-//                                        // update the information with the ID of the document
-//                                        String ID = ds.getId();
-//                                        firebase.collection("Personal").document(ID)
-//                                                .update("diaries", pDList);
-//                                    }
-//                                }
-//                            });
-//                     }
-//                     else
-//                     {
-//                         System.out.println("can't update");
-//                     }
-//                 }
-//             }
+             for (Events p : PersonalFragment.allPersonalEvents)
+             {
+                 ArrayList<Diary> pDList = p.getDiaries();
+                 String peTitle = p.getTitle();
 
-//                // for Other category
-//                for (Events o : OtherFragment.allOtherEvents)
-//                {
-//                    ArrayList<Diary> oDList = o.getDiaries();
-//                    String oeTitle = o.getTitle();
-//
-//                    for (Diary oD : oDList)
-//                    {
-//                        String oContent = oD.getWords();
-//
-//                        if (oC.equals(oContent))
-//                        {
-//                            ev = o;
-//                            oD.setWords(nC);
-//                            o.setDiaries(oDList);
-//
-//                            System.out.println("newList " + oDList.toString());
-//
-//                            firebase.collection("Other").whereEqualTo("title", oeTitle)
-//                                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                                    for (DocumentSnapshot ds : task.getResult().getDocuments()) {
-//                                        // update the information with the ID of the document
-//                                        String ID = ds.getId();
-//                                        firebase.collection("Other").document(ID)
-//                                                .update("diaries", oDList);
-//                                    }
-//                                }
-//                            });
-//                        } else {
-//                            System.out.println("can't update");
-//                        }
-//
-//                    }
-//                }
+                 for (Diary pD : pDList)
+                 {
+                     String pContent = pD.getWords();
+                     if (oC.equals(pContent))
+                     {
+                         ev = p;
+                         pD.setWords(nC);
+                         p.setDiaries(pDList);
+
+                         System.out.println("newList " + pDList.toString());
+
+                         firebase.collection("Personal").whereEqualTo("title", peTitle)
+                                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
+                         {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task)
+                                {
+                                    for (DocumentSnapshot ds : task.getResult().getDocuments())
+                                    {
+                                        // update the information with the ID of the document
+                                        String ID = ds.getId();
+                                        firebase.collection("Personal").document(ID)
+                                                .update("diaries", pDList);
+                                    }
+                                }
+                            });
+                     }
+                     else
+                     {
+                         System.out.println("can't update");
+                     }
+                 }
+             }
+
+                // for Other category
+                for (Events o : OtherFragment.allOtherEvents)
+                {
+                    ArrayList<Diary> oDList = o.getDiaries();
+                    String oeTitle = o.getTitle();
+
+                    for (Diary oD : oDList)
+                    {
+                        String oContent = oD.getWords();
+
+                        if (oC.equals(oContent))
+                        {
+                            ev = o;
+                            oD.setWords(nC);
+                            o.setDiaries(oDList);
+
+                            System.out.println("newList " + oDList.toString());
+
+                            firebase.collection("Other").whereEqualTo("title", oeTitle)
+                                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    for (DocumentSnapshot ds : task.getResult().getDocuments()) {
+                                        // update the information with the ID of the document
+                                        String ID = ds.getId();
+                                        firebase.collection("Other").document(ID)
+                                                .update("diaries", oDList);
+                                    }
+                                }
+                            });
+                        } else {
+                            System.out.println("can't update");
+                        }
+
+                    }
+                }
 
         }
     }

@@ -132,81 +132,81 @@ public class EventProfile extends AppCompatActivity implements diaryAdapter.diar
 
                 }
 
-//                // for Other Events
-//                for(Events o : OtherFragment.allOtherEvents)
-//                {
-//                    String deleteTitle = o.getTitle();
-//
-//                    if(deleteTitle.equals(title1))
-//                    {
-//                        firebase.collection("Other").whereEqualTo("title", title1)
-//                                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                                if (task.isSuccessful()) {
-//                                    for (DocumentSnapshot ds : task.getResult().getDocuments()) {
-//                                        String idd = ds.getId();
-//
-//                                        firebase.collection("Other").document(idd)
-//                                                .delete()
-//                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                                    @Override
-//                                                    public void onSuccess(Void aVoid) {
-//                                                        Log.d("delete", "DocumentSnapshot successfully deleted!");
-//                                                    }
-//                                                })
-//                                                .addOnFailureListener(new OnFailureListener() {
-//                                                    @Override
-//                                                    public void onFailure(@NonNull Exception e) {
-//                                                        Log.w("delete", "Error deleting document", e);
-//                                                    }
-//                                                });
-//                                    }
-//                                }
-//                            }
-//                        });
-//
-//                    }
-//
-//                }
-//
-//                // for Personal Events
-//
-//                for(Events p : PersonalFragment.allPersonalEvents)
-//                {
-//                    String deleteTitle = p.getTitle();
-//
-//                    if(deleteTitle.equals(title1))
-//                    {
-//                        firebase.collection("Personal").whereEqualTo("title", title1)
-//                                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                                if (task.isSuccessful()) {
-//                                    for (DocumentSnapshot ds : task.getResult().getDocuments()) {
-//                                        String idd = ds.getId();
-//                                        firebase.collection("Personal").document(idd)
-//                                                .delete()
-//                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                                    @Override
-//                                                    public void onSuccess(Void aVoid) {
-//                                                        Log.d("delete", "DocumentSnapshot successfully deleted!");
-//                                                    }
-//                                                })
-//                                                .addOnFailureListener(new OnFailureListener() {
-//                                                    @Override
-//                                                    public void onFailure(@NonNull Exception e) {
-//                                                        Log.w("delete", "Error deleting document", e);
-//                                                    }
-//                                                });
-//                                    }
-//                                }
-//                            }
-//                        });
-//
-//                    }
-//
-//                }
+                // for Other Events
+                for(Events o : OtherFragment.allOtherEvents)
+                {
+                    String deleteTitle = o.getTitle();
+
+                    if(deleteTitle.equals(title1))
+                    {
+                        firebase.collection("Other").whereEqualTo("title", title1)
+                                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (DocumentSnapshot ds : task.getResult().getDocuments()) {
+                                        String idd = ds.getId();
+
+                                        firebase.collection("Other").document(idd)
+                                                .delete()
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Log.d("delete", "DocumentSnapshot successfully deleted!");
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Log.w("delete", "Error deleting document", e);
+                                                    }
+                                                });
+                                    }
+                                }
+                            }
+                        });
+
+                    }
+
+                }
+
+                // for Personal Events
+
+                for(Events p : PersonalFragment.allPersonalEvents)
+                {
+                    String deleteTitle = p.getTitle();
+
+                    if(deleteTitle.equals(title1))
+                    {
+                        firebase.collection("Personal").whereEqualTo("title", title1)
+                                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (DocumentSnapshot ds : task.getResult().getDocuments()) {
+                                        String idd = ds.getId();
+                                        firebase.collection("Personal").document(idd)
+                                                .delete()
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Log.d("delete", "DocumentSnapshot successfully deleted!");
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Log.w("delete", "Error deleting document", e);
+                                                    }
+                                                });
+                                    }
+                                }
+                            }
+                        });
+
+                    }
+
+                }
 
             }
         });

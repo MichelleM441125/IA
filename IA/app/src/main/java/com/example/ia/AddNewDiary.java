@@ -99,56 +99,56 @@ public class AddNewDiary extends AppCompatActivity {
                     }
 
 //
-//                    //Personal
-//                    for(Events p : PersonalFragment.allPersonalEvents)
-//                    {
-//                        String pp = p.getTitle();
+                    //Personal
+                    for(Events p : PersonalFragment.allPersonalEvents)
+                    {
+                        String pp = p.getTitle();
+
+                        if(pp.equals(toEventName)){
+                            ArrayList<Diary> pdiaryArrayList = p.getDiaries();
+                            pdiaryArrayList.add(newDiary);
+
+                            firebase.collection("Personal").whereEqualTo("title", toEventName)
+                                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task)
+                                {
+                                    for (DocumentSnapshot ds : task.getResult().getDocuments())
+                                    {
+                                        // update the information with the ID of the document
+                                        String ID = ds.getId();
+                                        firebase.collection("Personal").document(ID)
+                                                .update("diaries", pdiaryArrayList);
+
+                                    }
+                                }
+                            });
+                            finish();
+                        }
+                    }
 //
-//                        if(pp.equals(toEventName)){
-//                            ArrayList<Diary> pdiaryArrayList = p.getDiaries();
-//                            pdiaryArrayList.add(newDiary);
-//
-//                            firebase.collection("Personal").whereEqualTo("title", toEventName)
-//                                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<QuerySnapshot> task)
-//                                {
-//                                    for (DocumentSnapshot ds : task.getResult().getDocuments())
-//                                    {
-//                                        // update the information with the ID of the document
-//                                        String ID = ds.getId();
-//                                        firebase.collection("Personal").document(ID)
-//                                                .update("diaries", pdiaryArrayList);
-//
-//                                    }
-//                                }
-//                            });
-//                            finish();
-//                        }
-//                    }
-////
-//                    //Other
-//                    for(Events o : OtherFragment.allOtherEvents)
-//                    {
-//                        String oo = o.getTitle();
-//                        if (oo.equals(toEventName))
-//                        {
-//                            ArrayList<Diary> diaryArrayList = o.getDiaries();
-//                            diaryArrayList.add(newDiary);
-//
-//                            firebase.collection("Other").whereEqualTo("title", toEventName)
-//                                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
-//                            {
-//                                @Override
-//                                public void onComplete(@NonNull Task<QuerySnapshot> task)
-//                                {
-//
-//                                }
-//                            });
-//
-//                            finish();
-//                        }
-//                    }
+                    //Other
+                    for(Events o : OtherFragment.allOtherEvents)
+                    {
+                        String oo = o.getTitle();
+                        if (oo.equals(toEventName))
+                        {
+                            ArrayList<Diary> diaryArrayList = o.getDiaries();
+                            diaryArrayList.add(newDiary);
+
+                            firebase.collection("Other").whereEqualTo("title", toEventName)
+                                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
+                            {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task)
+                                {
+
+                                }
+                            });
+
+                            finish();
+                        }
+                    }
                 }
                 else if(TextUtils.isEmpty(diaryText.getText().toString()))
                 {
