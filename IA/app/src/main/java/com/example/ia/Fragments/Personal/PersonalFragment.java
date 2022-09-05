@@ -1,6 +1,5 @@
 package com.example.ia.Fragments.Personal;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -29,9 +28,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-
-public class PersonalFragment extends Fragment implements PersonalAdapter.personalEventListener {
-
+public class PersonalFragment extends Fragment implements PersonalAdapter.personalEventListener
+{
     RecyclerView personalRecView;
     PersonalAdapter pAdapter;
 
@@ -55,16 +53,18 @@ public class PersonalFragment extends Fragment implements PersonalAdapter.person
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_personal, container, false);
         ImageButton button = (ImageButton)view.findViewById(R.id.AddNewPersonalEventButton);
-        button.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view)
             {
                 Intent intent = new Intent(getActivity(), AddEvents.class);
-                // send the name of the vehicle to the editVehicle activity
+                // send the name of the category to the addEvent activity
                 intent.putExtra("catMessage", "Personal");
                 startActivity(intent);
             }
@@ -107,10 +107,12 @@ public class PersonalFragment extends Fragment implements PersonalAdapter.person
         return view;
     }
 
+    // this function updates the recylcerView where all the events in that category are displayed
     public void getAndPopulateDate()
     {
         firebase.collection("Personal").get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
+                {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task)
                     {
@@ -118,14 +120,13 @@ public class PersonalFragment extends Fragment implements PersonalAdapter.person
                         {
                             for (DocumentSnapshot ds : task.getResult().getDocuments())
                             {
-
+                                // convert the documents to Events type
                                 Events getEvents = ds.toObject(Events.class);
                                 allPersonalEvents.add(getEvents);
                             }
-
+                            // run through each Event in the arraylist to get their title, date, and days
                             for(Events eachEvent : allPersonalEvents)
                             {
-
                                 String eachEventName = eachEvent.getTitle();
                                 events.add(eachEventName);
 
@@ -149,16 +150,16 @@ public class PersonalFragment extends Fragment implements PersonalAdapter.person
                 });
     }
 
+    // add all the remaining days into one arrayList
     public void showMostRecent()
     {
-
-
         for(String d : days)
         {
             int i = Integer.parseInt(d);
             intDays.add(i);
         }
 
+        // find the minimum number in that arrayList by comparing each number to the “minimum”
         int minimum = intDays.get(0);
         for (int i = 1; i < intDays.size(); i++)
         {
@@ -168,6 +169,7 @@ public class PersonalFragment extends Fragment implements PersonalAdapter.person
             }
         }
 
+        // run through all the events’ remaining day to find the one that mach with “minimum”
         for(Events e : allPersonalEvents)
         {
             String min = e.getDays();
@@ -185,8 +187,8 @@ public class PersonalFragment extends Fragment implements PersonalAdapter.person
     @Override
     public void personalEventOnClick(int position)
     {
+        // onClickListener: when the event in the recyclerView is clicked, send its info to the next screen
         chosenEvent = allPersonalEvents.get(position);
-
         Intent intent = new Intent(getActivity(), EventProfile.class);
         intent.putExtra("sentEV", chosenEvent.toString());
         startActivity(intent);

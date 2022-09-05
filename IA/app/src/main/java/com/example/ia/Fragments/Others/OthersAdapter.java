@@ -31,7 +31,8 @@ public class OthersAdapter extends RecyclerView.Adapter<OthersViewHolder>
 
     @NonNull
     @Override
-    public OthersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public OthersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    {
         View otherView = LayoutInflater.from(parent.getContext()).inflate(R.layout.other_view, parent, false);
         OthersViewHolder othersViewHolder = new OthersViewHolder(otherView, otherListener);
 
@@ -64,4 +65,3 @@ public class OthersAdapter extends RecyclerView.Adapter<OthersViewHolder>
         void otherEventOnClick(int position);
     }
 }
-

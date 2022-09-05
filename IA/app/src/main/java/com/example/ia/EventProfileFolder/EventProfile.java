@@ -30,7 +30,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class EventProfile extends AppCompatActivity implements diaryAdapter.diaryListener {
+public class EventProfile extends AppCompatActivity implements diaryAdapter.diaryListener
+{
 
     RecyclerView diaryRecView;
     diaryAdapter dAdapter;
@@ -38,6 +39,7 @@ public class EventProfile extends AppCompatActivity implements diaryAdapter.diar
     ArrayList<Diary> d;
 
     String chosenEV;
+    Diary chosenDiary;
 
     String title1;
     String date1;
@@ -51,11 +53,9 @@ public class EventProfile extends AppCompatActivity implements diaryAdapter.diar
 
     FirebaseFirestore firebase;
 
-    Diary chosenDiary;
-
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_profile);
 
@@ -66,6 +66,7 @@ public class EventProfile extends AppCompatActivity implements diaryAdapter.diar
         diaryRecView.setAdapter(dAdapter);
         diaryRecView.setLayoutManager(new LinearLayoutManager(this));
 
+        // get the event that is clicked in the main screen
         Bundle mg= getIntent().getExtras();
         chosenEV = mg.getString("sentEV");
 
@@ -79,8 +80,10 @@ public class EventProfile extends AppCompatActivity implements diaryAdapter.diar
 
         splitAndDisplay();
 
+        // when the icon is clicked, move to add diary screen
         ImageButton b = (ImageButton)this.findViewById(R.id.AddNewDiaryButtom);
-        b.setOnClickListener(new View.OnClickListener() {
+        b.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view)
             {
@@ -90,6 +93,7 @@ public class EventProfile extends AppCompatActivity implements diaryAdapter.diar
             }
         });
 
+        // when the delete icon is clicked
         ImageButton button = (ImageButton)this.findViewById(R.id.imageButton4);
         button.setOnClickListener(new View.OnClickListener()
         {
@@ -99,30 +103,41 @@ public class EventProfile extends AppCompatActivity implements diaryAdapter.diar
                 // for Main Events
                 for(Events e : MainWorkFragment.allMainEvents)
                 {
+                    // run through all the main events and get their title
                     String deleteTitle = e.getTitle();
 
+                    // if the title matches with the chosen one
                     if(deleteTitle.equals(title1))
                     {
+                        // delete the event in firebase
                         firebase.collection("Main").whereEqualTo("title", title1)
-                                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
+                        {
                             @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    for (DocumentSnapshot ds : task.getResult().getDocuments()) {
+                            public void onComplete(@NonNull Task<QuerySnapshot> task)
+                            {
+                                if (task.isSuccessful())
+                                {
+                                    for (DocumentSnapshot ds : task.getResult().getDocuments())
+                                    {
                                         String idd = ds.getId();
                                         firebase.collection("Main").document(idd)
                                                 .delete()
-                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                .addOnSuccessListener(new OnSuccessListener<Void>()
+                                                {
                                                     @Override
-                                                    public void onSuccess(Void aVoid) {
+                                                    public void onSuccess(Void aVoid)
+                                                    {
                                                         Log.d("delete", "DocumentSnapshot successfully deleted!");
                                                     }
-                                                }).addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                        Log.w("delete", "Error deleting document", e);
-                                                    }
-                                                });
+                                                }).addOnFailureListener(new OnFailureListener()
+                                        {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e)
+                                            {
+                                                Log.w("delete", "Error deleting document", e);
+                                            }
+                                        });
                                     }
                                 }
                             }
@@ -140,24 +155,32 @@ public class EventProfile extends AppCompatActivity implements diaryAdapter.diar
                     if(deleteTitle.equals(title1))
                     {
                         firebase.collection("Other").whereEqualTo("title", title1)
-                                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
+                        {
                             @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    for (DocumentSnapshot ds : task.getResult().getDocuments()) {
+                            public void onComplete(@NonNull Task<QuerySnapshot> task)
+                            {
+                                if (task.isSuccessful())
+                                {
+                                    for (DocumentSnapshot ds : task.getResult().getDocuments())
+                                    {
                                         String idd = ds.getId();
 
                                         firebase.collection("Other").document(idd)
                                                 .delete()
-                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                .addOnSuccessListener(new OnSuccessListener<Void>()
+                                                {
                                                     @Override
-                                                    public void onSuccess(Void aVoid) {
+                                                    public void onSuccess(Void aVoid)
+                                                    {
                                                         Log.d("delete", "DocumentSnapshot successfully deleted!");
                                                     }
                                                 })
-                                                .addOnFailureListener(new OnFailureListener() {
+                                                .addOnFailureListener(new OnFailureListener()
+                                                {
                                                     @Override
-                                                    public void onFailure(@NonNull Exception e) {
+                                                    public void onFailure(@NonNull Exception e)
+                                                    {
                                                         Log.w("delete", "Error deleting document", e);
                                                     }
                                                 });
@@ -171,7 +194,6 @@ public class EventProfile extends AppCompatActivity implements diaryAdapter.diar
                 }
 
                 // for Personal Events
-
                 for(Events p : PersonalFragment.allPersonalEvents)
                 {
                     String deleteTitle = p.getTitle();
@@ -179,23 +201,31 @@ public class EventProfile extends AppCompatActivity implements diaryAdapter.diar
                     if(deleteTitle.equals(title1))
                     {
                         firebase.collection("Personal").whereEqualTo("title", title1)
-                                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
+                        {
                             @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    for (DocumentSnapshot ds : task.getResult().getDocuments()) {
+                            public void onComplete(@NonNull Task<QuerySnapshot> task)
+                            {
+                                if (task.isSuccessful())
+                                {
+                                    for (DocumentSnapshot ds : task.getResult().getDocuments())
+                                    {
                                         String idd = ds.getId();
                                         firebase.collection("Personal").document(idd)
                                                 .delete()
-                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                .addOnSuccessListener(new OnSuccessListener<Void>()
+                                                {
                                                     @Override
-                                                    public void onSuccess(Void aVoid) {
+                                                    public void onSuccess(Void aVoid)
+                                                    {
                                                         Log.d("delete", "DocumentSnapshot successfully deleted!");
                                                     }
                                                 })
-                                                .addOnFailureListener(new OnFailureListener() {
+                                                .addOnFailureListener(new OnFailureListener()
+                                                {
                                                     @Override
-                                                    public void onFailure(@NonNull Exception e) {
+                                                    public void onFailure(@NonNull Exception e)
+                                                    {
                                                         Log.w("delete", "Error deleting document", e);
                                                     }
                                                 });
@@ -212,25 +242,34 @@ public class EventProfile extends AppCompatActivity implements diaryAdapter.diar
         });
     }
 
+    // this method display all the diaries of the chosen event
     public void getAndPopulateDataMain()
     {
+        // get the event whose title matches with the chosen one
+        // then add its diaries to the recylcerview
         firebase.collection("Main").whereEqualTo("title", title1).get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
+                {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (DocumentSnapshot ds : task.getResult().getDocuments()) {
+                    public void onComplete(@NonNull Task<QuerySnapshot> task)
+                    {
+                        if (task.isSuccessful())
+                        {
+                            for (DocumentSnapshot ds : task.getResult().getDocuments())
+                            {
 
                                 Events getEvents = ds.toObject(Events.class);
                                 d = getEvents.getDiaries();
-                                for (Diary dd : d) {
+                                for (Diary dd : d)
+                                {
                                     dates.add(dd.getDiaryDate());
                                 }
                                 dAdapter.newData(dates);
                                 dAdapter.notifyDataSetChanged();
-
                             }
-                        } else {
+                        }
+                        else
+                        {
                             Toast.makeText(getApplicationContext(), "you don't have any diary yet, " +
                                     "go add some", Toast.LENGTH_SHORT).show();
                         }
@@ -240,24 +279,31 @@ public class EventProfile extends AppCompatActivity implements diaryAdapter.diar
 
     }
 
-    public void getAndPopulateDataPersonal() {
+    public void getAndPopulateDataPersonal()
+    {
         firebase.collection("Personal").whereEqualTo("title", title1).get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
+                {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (DocumentSnapshot ds : task.getResult().getDocuments()) {
+                    public void onComplete(@NonNull Task<QuerySnapshot> task)
+                    {
+                        if (task.isSuccessful())
+                        {
+                            for (DocumentSnapshot ds : task.getResult().getDocuments())
+                            {
 
                                 Events getEvents = ds.toObject(Events.class);
                                 d = getEvents.getDiaries();
-                                for (Diary dd : d) {
+                                for (Diary dd : d)
+                                {
                                     dates.add(dd.getDiaryDate());
                                 }
                                 dAdapter.newData(dates);
                                 dAdapter.notifyDataSetChanged();
-
                             }
-                        } else {
+                        }
+                        else
+                        {
                             Toast.makeText(getApplicationContext(), "you don't have any diary yet, " +
                                     "go add some", Toast.LENGTH_SHORT).show();
                         }
@@ -268,9 +314,9 @@ public class EventProfile extends AppCompatActivity implements diaryAdapter.diar
 
     public void getAndPopulateDataOther()
     {
-
         firebase.collection("Other").whereEqualTo("title", title1).get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
+                {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task)
                     {
@@ -288,7 +334,6 @@ public class EventProfile extends AppCompatActivity implements diaryAdapter.diar
 
                                 dAdapter.newData(dates);
                                 dAdapter.notifyDataSetChanged();
-
                             }
                         }
                         else
@@ -296,12 +341,11 @@ public class EventProfile extends AppCompatActivity implements diaryAdapter.diar
                             Toast.makeText(getApplicationContext(), "you don't have any diary yet, " +
                                     "go add some", Toast.LENGTH_SHORT).show();
                         }
-
                     }
                 });
     }
 
-    //Events{title='CS IA Due', date='2022-09-02', quote='You should've done more', days='10'}
+    // this method split up the “to String” message and display different parts of the chosen event
     public void splitAndDisplay()
     {
         title1 = chosenEV.substring(chosenEV.indexOf("'", 5 ) + 1 , chosenEV.lastIndexOf("',"));
@@ -318,6 +362,7 @@ public class EventProfile extends AppCompatActivity implements diaryAdapter.diar
         getAndPopulateDataOther();
     }
 
+    // when a diary is clicked, transit and send its info to the next screen
     @Override
     public void diaryOnClick(int position)
     {

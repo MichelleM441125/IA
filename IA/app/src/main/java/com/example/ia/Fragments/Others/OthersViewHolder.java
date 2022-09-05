@@ -14,7 +14,8 @@ public class OthersViewHolder extends RecyclerView.ViewHolder implements View.On
     protected TextView otherDateText;
     OthersAdapter.otherEventListener otherListener;
 
-    public OthersViewHolder(@NonNull View itemView, OthersAdapter.otherEventListener otherListener1) {
+    public OthersViewHolder(@NonNull View itemView, OthersAdapter.otherEventListener otherListener1)
+    {
         super(itemView);
 
         otherEventText = itemView.findViewById(R.id.othersEvent);

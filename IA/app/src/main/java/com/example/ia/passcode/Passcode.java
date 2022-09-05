@@ -35,56 +35,50 @@ public class Passcode extends AppCompatActivity {
 
         passcodeView = findViewById(R.id.passcodeview);
 
+        // get the current passcode from firebase
         DocumentReference docRef = firebase.collection("User")
                 .document("currUser");
-
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>()
+        {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
+            public void onComplete(@NonNull Task<DocumentSnapshot> task)
+            {
+                if (task.isSuccessful())
+                {
                     DocumentSnapshot document = task.getResult();
-                    Log.d("getData", "DocumentSnapshot data: " + document.getData());
 
+                    // convert the result to String
                     String dddd = document.getData().toString();
                     code = dddd.substring(dddd.indexOf("=")+1, dddd.indexOf("}"));
-                    System.out.println(code);
-                    // to set length of password as here
-                    // we have set the length as 4 digits
+
+                    // set the length as 4 digits
                     passcodeView.setPasscodeLength(4)
                             // to set  passcode
                             .setLocalPasscode(code)
 
-                            // to set listener to it to check whether
-                            // passwords has matched or failed
-                            .setListener(new PasscodeView.PasscodeViewListener() {
+                            // set listener to it to check whether passwords has matched or failed
+                            .setListener(new PasscodeView.PasscodeViewListener()
+                            {
                                 @Override
-                                public void onFail() {
-                                    // to show message when Password is incorrect
+                                public void onFail()
+                                {
+                                    // show message when Password is incorrect
                                     Toast.makeText(Passcode.this, "Password is wrong!", Toast.LENGTH_SHORT).show();
                                 }
 
                                 @Override
-                                public void onSuccess(String number) {
-                                    // here is used so that when password
-                                    // is correct user will be directly navigated to next activity
+                                public void onSuccess(String number)
+                                {
+                                    //  when password is correct user will be directly navigated to next activity
                                     Intent intent_passcode = new Intent(Passcode.this, Home.class);
                                     startActivity(intent_passcode);
                                 }
                             });
-                } else {
+                } else
+                {
                     Log.d("getData", "No such document");
                 }
             }
         });
-
-
-
-        }
     }
-
-
-
-
-
-
-
+}

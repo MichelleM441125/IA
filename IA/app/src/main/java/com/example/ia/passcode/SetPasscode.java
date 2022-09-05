@@ -12,16 +12,19 @@ import com.example.ia.R;
 import com.example.ia.User;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class SetPasscode extends AppCompatActivity {
+public class SetPasscode extends AppCompatActivity
+{
 
     public EditText newPasscode;
     private FirebaseFirestore firebase;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_passcode);
 
+        // locate textbox
         newPasscode = findViewById(R.id.passcodeText);
         firebase = FirebaseFirestore.getInstance();
 
@@ -29,6 +32,7 @@ public class SetPasscode extends AppCompatActivity {
 
     public void setNewPasscode(View x)
     {
+        // if the passcode the user enter is not 4 digits, toast message
         if (newPasscode.length() != 4 )
         {
             Toast.makeText(getApplicationContext(),"The Passcode Can Only be 4 Numbers",
@@ -36,6 +40,7 @@ public class SetPasscode extends AppCompatActivity {
         }
         else
         {
+            // otherwise update firebase with the new passcode
             String passcode = newPasscode.getText().toString();
 
             firebase.collection("User").document("currUser")

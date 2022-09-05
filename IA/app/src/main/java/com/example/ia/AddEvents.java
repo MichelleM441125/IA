@@ -21,7 +21,8 @@ import java.util.Date;
 import java.util.Calendar;
 
 
-public class AddEvents extends AppCompatActivity {
+public class AddEvents extends AppCompatActivity
+{
 
     private String newCategoryText;
     private String daysDifference;
@@ -38,6 +39,7 @@ public class AddEvents extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_event);
 
+        // get the category name sent by the fragments
         Bundle MainMessage = getIntent().getExtras();
         String newCatMessage;
         if (MainMessage != null) {
@@ -50,13 +52,13 @@ public class AddEvents extends AppCompatActivity {
         newQuoteText = findViewById(R.id.NewEventQuoteText);
 
         firebase = FirebaseFirestore.getInstance();
-
-
     }
 
 
+    // this method add a new event to the firebse
     public void addThisNewEvent(View x)
     {
+        // if any of the text field is empty, then toast error message
         if(TextUtils.isEmpty(newNameText.getText().toString()) || TextUtils.isEmpty(newDateText.getText().toString())
                 || TextUtils.isEmpty(newQuoteText.getText().toString()))
         {
@@ -65,14 +67,16 @@ public class AddEvents extends AppCompatActivity {
         }
         else
         {
+            // otherwise, get the inputs
             String nameInput = newNameText.getText().toString();
             String dateInput = newDateText.getText().toString();
             String quoteInput = newQuoteText.getText().toString();
             ArrayList<Diary> newDiaryList = new ArrayList<>();
 
+            // create a new date format
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-
+            try
+            {
                 Calendar c = Calendar.getInstance();
                 String t = format.format(c.getTime());
 
@@ -83,7 +87,8 @@ public class AddEvents extends AppCompatActivity {
                 long differenceDates = difference / (24 * 60 * 60 * 1000);
                 daysDifference = Long.toString(differenceDates);
 
-            } catch (ParseException e)
+            }
+            catch (ParseException e)
             {
                 e.printStackTrace();
             }
@@ -96,7 +101,6 @@ public class AddEvents extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
 
             finish();
-
         }
 
     }

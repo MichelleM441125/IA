@@ -12,30 +12,32 @@ import com.example.ia.Fragments.Others.OtherFragment;
 import com.example.ia.Fragments.Personal.PersonalFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class Home extends AppCompatActivity {
+public class Home extends AppCompatActivity
+{
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
-        // as soon as the application opens the first
-        // fragment should be shown to the user
+        // as soon as the application opens the first fragment should be shown to the user
         // in this case it is algorithm fragment
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MainWorkFragment()).commit();
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener()
+    {
         @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            // By using switch we can easily get
-            // the selected fragment
-            // by using there id.
+        public boolean onNavigationItemSelected(@NonNull MenuItem item)
+        {
+            // get the selected fragment by using their id.
             Fragment selectedFragment = null;
-            switch (item.getItemId()) {
+            switch (item.getItemId())
+            {
                 case R.id.MainWork:
                     selectedFragment = new MainWorkFragment();
                     break;
@@ -46,8 +48,7 @@ public class Home extends AppCompatActivity {
                     selectedFragment = new OtherFragment();
                     break;
             }
-            // It will help to replace the
-            // one fragment to other.
+            // replace the one fragment to other.
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, selectedFragment)
@@ -56,3 +57,4 @@ public class Home extends AppCompatActivity {
         }
     };
 }
+

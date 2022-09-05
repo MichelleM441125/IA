@@ -45,7 +45,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainViewHolder>
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return mEvents.size();
     }
 

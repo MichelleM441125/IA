@@ -5,12 +5,11 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
-public class Diary {
+public class Diary
+{
 
     public String diaryDate;
     public String words;
-//    public ImageView image;
-
 
     public Diary()
     {
@@ -25,26 +24,31 @@ public class Diary {
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "Diary{" +
                 "diaryDate='" + diaryDate + '\'' +
                 ", words='" + words + '\'' +
                 '}';
     }
 
-    public String getDiaryDate() {
+    public String getDiaryDate()
+    {
         return diaryDate;
     }
 
-    public void setDiaryDate(String diaryDate) {
+    public void setDiaryDate(String diaryDate)
+    {
         this.diaryDate = diaryDate;
     }
 
-    public String getWords() {
+    public String getWords()
+    {
         return words;
     }
 
-    public void setWords(String words) {
+    public void setWords(String words)
+    {
         this.words = words;
     }
 }

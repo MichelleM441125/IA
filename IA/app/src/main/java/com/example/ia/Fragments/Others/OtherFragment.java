@@ -29,8 +29,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 
-public class OtherFragment extends Fragment implements OthersAdapter.otherEventListener {
-
+public class OtherFragment extends Fragment implements OthersAdapter.otherEventListener
+{
     RecyclerView recView;
     OthersAdapter oAdapter;
 
@@ -52,16 +52,18 @@ public class OtherFragment extends Fragment implements OthersAdapter.otherEventL
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_other, container, false);
         ImageButton image = (ImageButton)view.findViewById(R.id.AddNewOtherEventButton);
-        image.setOnClickListener(new View.OnClickListener() {
+        image.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view)
             {
                 Intent intent = new Intent(getActivity(), AddEvents.class);
-                // send the name of the vehicle to the editVehicle activity
+                // send the name of the category to the addEvent activity
                 intent.putExtra("catMessage", "Other");
                 startActivity(intent);
             }
@@ -107,7 +109,8 @@ public class OtherFragment extends Fragment implements OthersAdapter.otherEventL
     public void getAndPopulateDate()
     {
         firebase.collection("Other").get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
+                {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task)
                     {
@@ -115,12 +118,12 @@ public class OtherFragment extends Fragment implements OthersAdapter.otherEventL
                         {
                             for (DocumentSnapshot ds : task.getResult().getDocuments())
                             {
-                                // convert the vehicle documents to Vehicle type
+                                // convert the documents to Event type
                                 Events getEvents = ds.toObject(Events.class);
                                 // add them into the arraylist
                                 allOtherEvents.add(getEvents);
                             }
-                            // run through each vehicle in the arraylist to get their model, type, and status
+                            // run through each event in the arraylist to get their title, date, and days
                             for(Events eachEvent : allOtherEvents)
                             {
                                 String eachEventName = eachEvent.getTitle();
@@ -145,15 +148,19 @@ public class OtherFragment extends Fragment implements OthersAdapter.otherEventL
                 });
     }
 
+
+
+    // this function find the most recent event and display it.
     public void showMostRecent()
     {
-
+        // add all the remaining days into one arrayList
         for(String d : days)
         {
             int i = Integer.parseInt(d);
             intDays.add(i);
         }
 
+        // find the minimum number in that arrayList by comparing each number to the “minimum”
         int minimum = intDays.get(0);
         for (int i = 1; i < intDays.size(); i++)
         {
@@ -163,11 +170,13 @@ public class OtherFragment extends Fragment implements OthersAdapter.otherEventL
             }
         }
 
+        // run through all the events’ remaining day to find the one that mach with “minimum”
         for(Events e : allOtherEvents)
         {
             String min = e.getDays();
             if(min.equals(String.valueOf(minimum)))
             {
+                // display that event
                 presentTitle.setText(e.getTitle());
                 presentDate.setText(e.getDate());
                 presentDays.setText(e.getDays());
@@ -180,6 +189,7 @@ public class OtherFragment extends Fragment implements OthersAdapter.otherEventL
     @Override
     public void otherEventOnClick(int position)
     {
+        // onClickListener: when the event in the recyclerView is clicked, send its info to the next screen
         chosenEvent = allOtherEvents.get(position);
         Intent intent = new Intent(getActivity(), EventProfile.class);
         intent.putExtra("sentEV", chosenEvent.toString());

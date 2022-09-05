@@ -1,3 +1,4 @@
+
 package com.example.ia.Fragments.Main;
 
 import android.content.Intent;
@@ -63,12 +64,13 @@ public class MainWorkFragment extends Fragment implements MainAdapter.mainEventL
             public void onClick(View view)
             {
                 Intent intent = new Intent(getActivity(), AddEvents.class);
-                // send the name of the vehicle to the editVehicle activity
+                // send the name of the category to the addEvent activity
                 intent.putExtra("catMessage", "Main");
                 startActivity(intent);
             }
         });
 
+        // set onClickListener to the setting button
         ImageButton set = (ImageButton)view.findViewById(R.id.settingButton);
         set.setOnClickListener(new View.OnClickListener()
         {
@@ -124,7 +126,7 @@ public class MainWorkFragment extends Fragment implements MainAdapter.mainEventL
                                 // add them into the arraylist
                                 allMainEvents.add(getEvents);
                             }
-                            // run through each vehicle in the arraylist to get their title, date, and days
+                            // run through each Event in the arraylist to get their title, date, and days
                             for(Events eachEvent : allMainEvents)
                             {
                                 String eachEventName = eachEvent.getTitle();
@@ -151,15 +153,17 @@ public class MainWorkFragment extends Fragment implements MainAdapter.mainEventL
 
     }
 
+    // this function find the most recent event and display it.
     public void showMostRecent()
     {
-
+        // add all the remaining days into one arrayList
         for(String d : days)
         {
             int i = Integer.parseInt(d);
             intDays.add(i);
         }
 
+        // find the minimum number in that arrayList by comparing each number to the “minimum”
         int minimum = intDays.get(0);
         for (int i = 1; i < intDays.size(); i++)
         {
@@ -169,11 +173,13 @@ public class MainWorkFragment extends Fragment implements MainAdapter.mainEventL
             }
         }
 
+        // run through all the events’ remaining day to find the one that mach with “minimum”
         for(Events e : allMainEvents)
         {
             String min = e.getDays();
             if(min.equals(String.valueOf(minimum)))
             {
+                // display that event
                 presentTitle.setText(e.getTitle());
                 presentDate.setText(e.getDate());
                 presentDays.setText(e.getDays());
@@ -185,6 +191,7 @@ public class MainWorkFragment extends Fragment implements MainAdapter.mainEventL
     @Override
     public void mainEventOnClick(int position)
     {
+        // onClickListener: when the event in the recyclerView is clicked, send its info to the next screen
         chosenEvent = allMainEvents.get(position);
         System.out.println(chosenEvent.toString());
         Intent intent = new Intent(getActivity(), EventProfile.class);
@@ -192,4 +199,3 @@ public class MainWorkFragment extends Fragment implements MainAdapter.mainEventL
         startActivity(intent);
     }
 }
-

@@ -12,17 +12,20 @@ import com.example.ia.AddEvents;
 import com.example.ia.EditDiary;
 import com.example.ia.R;
 
-public class DiaryProfile extends AppCompatActivity {
+public class DiaryProfile extends AppCompatActivity
+{
 
     TextView profileDate;
     TextView profileContent;
     String thisDiary;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_profile);
 
+        //  get the info of the clicked diary title
         Bundle mg= getIntent().getExtras();
         thisDiary = mg.getString("sentDiary");
 
@@ -31,8 +34,10 @@ public class DiaryProfile extends AppCompatActivity {
 
         update();
 
+        // if the edit diary icon is clicked, send the current diary’s info to the next screen
         ImageButton button = this.findViewById(R.id.editDiaryButton);
-        button.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view)
             {
@@ -41,9 +46,9 @@ public class DiaryProfile extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
+    // this function set up the screen by displaying the title and the content of the diary
     public void update()
     {
         String showDate = thisDiary.substring(thisDiary.indexOf("'", 5 ) + 1 , thisDiary.lastIndexOf("',"));

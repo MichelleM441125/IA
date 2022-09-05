@@ -7,7 +7,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class PersonalViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
+public class PersonalViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+{
 
     protected TextView personalEventText;
     protected TextView personalDaysText;
@@ -15,7 +16,8 @@ public class PersonalViewHolder extends RecyclerView.ViewHolder implements View.
     PersonalAdapter.personalEventListener personalListener;
 
 
-    public PersonalViewHolder(@NonNull View itemView, PersonalAdapter.personalEventListener personalListener1) {
+    public PersonalViewHolder(@NonNull View itemView, PersonalAdapter.personalEventListener personalListener1)
+    {
         super(itemView);
 
         personalEventText = itemView.findViewById(R.id.personalEvent);
@@ -24,7 +26,6 @@ public class PersonalViewHolder extends RecyclerView.ViewHolder implements View.
         personalListener = personalListener1;
 
         itemView.setOnClickListener(this);
-
     }
 
     @Override

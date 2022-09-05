@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class AddNewDiary extends AppCompatActivity {
-
     TextView todayText;
     EditText diaryText;
     String toEventName;
@@ -39,56 +38,56 @@ public class AddNewDiary extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_diary);
 
+        // get the event sent from event profile
         Bundle mg = getIntent().getExtras();
         toEventName = mg.getString("info");
 
         todayText = findViewById(R.id.todayDate);
 
+        // get today’s date and set it as the title of the diary
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c = Calendar.getInstance();
         today = format.format(c.getTime());
         todayText.setText(today);
 
-        ImageButton b = (ImageButton)this.findViewById(R.id.imageButton2);
+        // set up the image button
+        ImageButton b = (ImageButton) this.findViewById(R.id.imageButton2);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-                if(!(TextUtils.isEmpty(diaryText.getText().toString())))
-                {
+            public void onClick(View view) {
+                // if the textbox is not empty
+                if (!(TextUtils.isEmpty(diaryText.getText().toString()))) {
+                    // get the text from the textbox and covert it to a diary object
                     String diaryInput = diaryText.getText().toString();
                     Diary newDiary = new Diary(today, diaryInput);
 
                     //Main
-                    for(Events e : MainWorkFragment.allMainEvents)
-                    {
+                    for (Events e : MainWorkFragment.allMainEvents) {
+                        // go through all the main category events and their title
                         String n = e.getTitle();
-                        if (n.equals(toEventName))
-                        {
+
+                        // if the event is in the main category list
+                        if (n.equals(toEventName)) {
+                            // create a new diary ArrayList and add the new generated diary into the list
                             ArrayList<Diary> diaryArrayList = e.getDiaries();
                             diaryArrayList.add(newDiary);
 
+                            // replace the original diary list with the new one for the event in fire store
                             firebase.collection("Main").whereEqualTo("title", toEventName)
-                                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
-                            {
+                                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                 @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task)
-                                {
-                                    if(task.isSuccessful())
-                                    {
-                                        for (DocumentSnapshot ds : task.getResult().getDocuments())
-                                        {
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        for (DocumentSnapshot ds : task.getResult().getDocuments()) {
                                             // update the information with the ID of the document
                                             String ID = ds.getId();
                                             firebase.collection("Main").document(ID)
                                                     .update("diaries", diaryArrayList);
-                                            Toast.makeText(getApplicationContext(),"Successfully Added",
+                                            Toast.makeText(getApplicationContext(), "Successfully Added",
                                                     Toast.LENGTH_SHORT).show();
                                         }
-                                    }
-                                    else
-                                    {
-                                        Toast.makeText(getApplicationContext(),"sorry,please try again later",
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "sorry,please try again later",
                                                 Toast.LENGTH_SHORT).show();
                                     }
                                 }
@@ -98,23 +97,20 @@ public class AddNewDiary extends AppCompatActivity {
                         }
                     }
 
-//
+
                     //Personal
-                    for(Events p : PersonalFragment.allPersonalEvents)
-                    {
+                    for (Events p : PersonalFragment.allPersonalEvents) {
                         String pp = p.getTitle();
 
-                        if(pp.equals(toEventName)){
+                        if (pp.equals(toEventName)) {
                             ArrayList<Diary> pdiaryArrayList = p.getDiaries();
                             pdiaryArrayList.add(newDiary);
 
                             firebase.collection("Personal").whereEqualTo("title", toEventName)
                                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                 @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task)
-                                {
-                                    for (DocumentSnapshot ds : task.getResult().getDocuments())
-                                    {
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    for (DocumentSnapshot ds : task.getResult().getDocuments()) {
                                         // update the information with the ID of the document
                                         String ID = ds.getId();
                                         firebase.collection("Personal").document(ID)
@@ -126,22 +122,18 @@ public class AddNewDiary extends AppCompatActivity {
                             finish();
                         }
                     }
-//
+
                     //Other
-                    for(Events o : OtherFragment.allOtherEvents)
-                    {
+                    for (Events o : OtherFragment.allOtherEvents) {
                         String oo = o.getTitle();
-                        if (oo.equals(toEventName))
-                        {
+                        if (oo.equals(toEventName)) {
                             ArrayList<Diary> diaryArrayList = o.getDiaries();
                             diaryArrayList.add(newDiary);
 
                             firebase.collection("Other").whereEqualTo("title", toEventName)
-                                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
-                            {
+                                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                 @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task)
-                                {
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
                                 }
                             });
@@ -149,10 +141,8 @@ public class AddNewDiary extends AppCompatActivity {
                             finish();
                         }
                     }
-                }
-                else if(TextUtils.isEmpty(diaryText.getText().toString()))
-                {
-                    Toast.makeText(getApplicationContext(),"Please fill in all the info",
+                } else if (TextUtils.isEmpty(diaryText.getText().toString())) {
+                    Toast.makeText(getApplicationContext(), "Please fill in all the info",
                             Toast.LENGTH_SHORT).show();
                 }
 
@@ -162,10 +152,5 @@ public class AddNewDiary extends AppCompatActivity {
         diaryText = findViewById(R.id.hehehe);
 
         firebase = FirebaseFirestore.getInstance();
-    }
-
-    public void addMainDairy()
-    {
-
     }
 }

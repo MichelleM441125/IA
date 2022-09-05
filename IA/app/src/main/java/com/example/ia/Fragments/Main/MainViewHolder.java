@@ -31,6 +31,5 @@ public class MainViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     public void onClick(View view)
     {
         mainListener.mainEventOnClick(getAdapterPosition());
-
     }
 }
