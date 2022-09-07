@@ -3,11 +3,11 @@
 Title: Days
 
 Description: 
-- This app helps users to oganize tasks of the major aspects of their life, including academic/work, personal life, and other.
+- This app helps users to organize tasks of the major aspects of their life, including academic/work, personal life, and other.
 - This app motivates the user to complete the task by displaying the remaining days till the target events, displaying motivational quotes at the entrance,
-  and allowing them to add their own encourating quotes
+  and allowing them to add their own encouraging quotes
 - Days also protects users' privacy by having the passcode function.
-- Lastly, users can document their progress by using the diary funciton.
+- Lastly, users can document their progress by using the diary function.
 
 How to run the app:
 - Download Android Studio from the website: https://developer.android.com/studio
